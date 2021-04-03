@@ -17,10 +17,12 @@ Titul před jménem / string / Ing.
 Jméno / string / Pavel
 Příjmení / string / Novák
 Titul za jménem / string / Dis.
-Telefon / string / +420565565001
-Mobil / string / +420702666001
-Email / string / pavel.novak@utb.cz
-Kancelář / string / 
+Pracovní telefon / string / +420565565001
+Soukromý telefon / string / +420702666001
+Pracovní email / string / pavel.novak@utb.cz
+Soukromý email / string / pavel.novak@seznam.cz
+Kancelář / string / UI1EO123
+Doktorand / bool / true, false
 Úvazek / enum / poloviční, plný
 
 3. Model Skupinky
