@@ -1,21 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package utbsys;
 
-/**
- *
- * @author Honza
- */
-public class UTBSys {
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.stage.Stage;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+public class UTBSys extends Application{
+
+    @Override
+    public void start(Stage primaryStage) throws Exception { //Zajišťuje start a kontroluje zda existují dvě dané věci a zajistí další okna
+        GUI_hlavniObrazovkaContoller guiHlavniObrazovka = new GUI_hlavniObrazovkaContoller();
+        guiHlavniObrazovka.showStage();
     }
     
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+  
 }
+
