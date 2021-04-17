@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="416.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="28.0" layoutY="28.0" text="Název skupinky:" />
+      <Label layoutX="28.0" layoutY="71.0" text="Zkratka skupinky:" />
+      <Label layoutX="28.0" layoutY="114.0" text="Ročník:" />
+      <Label layoutX="28.0" layoutY="157.0" text="Semestr:" />
+      <Label layoutX="28.0" layoutY="200.0" text="Počet studentů:" />
+      <Label layoutX="28.0" layoutY="243.0" text="Forma studia:" />
+      <Label layoutX="28.0" layoutY="286.0" text="Typ studia:" />
+      <Label layoutX="28.0" layoutY="329.0" text="Jazyk:" />
+      <TextField fx:id="tf_nazevSkupinky" layoutX="211.0" layoutY="24.0" />
+      <TextField fx:id="tf_zkratkaSkupinky" layoutX="210.0" layoutY="67.0" />
+      <TextField fx:id="tf_rocnik" layoutX="210.0" layoutY="110.0" />
+      <ChoiceBox fx:id="chb_semestr" layoutX="211.0" layoutY="153.0" prefWidth="150.0" />
+      <TextField fx:id="tf_pocetStudentu" layoutX="210.0" layoutY="196.0" />
+      <ChoiceBox fx:id="chb_formaStudia" layoutX="210.0" layoutY="239.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chb_typStudia" layoutX="210.0" layoutY="282.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chb_jazyk" layoutX="210.0" layoutY="325.0" prefWidth="150.0" />
+      <Button fx:id="btn_pridat" layoutX="337.0" layoutY="368.0" mnemonicParsing="false" text="Přidat" />
+   </children>
+</AnchorPane>
