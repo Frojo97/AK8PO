@@ -64,15 +64,29 @@ public class GUI_pridatSkupinkuController {
     
     private void pridatSkupinku(){
         if(kontrolaTextField()){
-            System.out.println("vpohodě");
-            Skupinka skupinka = new Skupinka(tf_nazevSkupinky.getText(),
-                    tf_zkratkaSkupinky.getText(),
-                    Integer.parseInt(tf_rocnik.getText()),
-                    chb_semestr.getValue(),
-                    Integer.parseInt(tf_pocetStudentu.getText()),
-                    chb_formaStudia.getValue(),
-                    chb_typStudia.getValue(),
-                    chb_jazyk.getValue());
+            int rocnik;
+            int pocetStudentu;
+            try{
+                rocnik = Integer.parseInt(tf_rocnik.getText());
+                pocetStudentu = Integer.parseInt(tf_pocetStudentu.getText());
+                if (rocnik > 0 && rocnik < 11 && pocetStudentu > -1 && pocetStudentu < 1000){
+                    Skupinka skupinka = new Skupinka(tf_nazevSkupinky.getText(),
+                        tf_zkratkaSkupinky.getText(),
+                        Integer.parseInt(tf_rocnik.getText()),
+                        chb_semestr.getValue(),
+                        Integer.parseInt(tf_pocetStudentu.getText()),
+                        chb_formaStudia.getValue(),
+                        chb_typStudia.getValue(),
+                        chb_jazyk.getValue());
+                    StagePridatSkupinku.close(); 
+                }
+                else{
+                    AlertOkno alert = new AlertOkno('E', "Chyba", "Číselné hodnoty přesahují povolenou mez!\nHodnoty mohou být od 1 do 10 pro ročnik a pro pocet studentů od 0 do 1000.");
+                }     
+            }
+            catch (NumberFormatException e){
+                AlertOkno alert = new AlertOkno('E', "Chyba", "Nebyla správně zadána číselná hodnota!");
+            }           
         }
         else{
             AlertOkno alert = new AlertOkno('E', "Chyba", "Nevyplnil si, žádné pole!");
@@ -91,6 +105,5 @@ public class GUI_pridatSkupinkuController {
             return true;
         else
             return false;
-    }
-    
+    } 
 }

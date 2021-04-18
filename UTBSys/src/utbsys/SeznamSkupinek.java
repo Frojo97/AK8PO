@@ -10,5 +10,7 @@ public class SeznamSkupinek {
         this.seznamSkupinky.add(sk);
     }
     
-    
+    /*public void odstranitZeSeznamu(Skupinka sk){ //Odstraní danou skupinku
+        this.seznamSkupinky.remove(sk);
+    }*/
 }
