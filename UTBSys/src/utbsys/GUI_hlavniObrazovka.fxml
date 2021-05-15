@@ -43,6 +43,8 @@
                         <ToolBar prefHeight="40.0" prefWidth="200.0">
                            <items>
                             <Button fx:id="btn_pridatSkupinku" mnemonicParsing="false" text="Přidat skupinku" />
+                              <Button mnemonicParsing="false" text="Editovat skupinku" />
+                              <Button mnemonicParsing="false" text="Smazat skupinku" />
                            </items>
                         </ToolBar>
                         <ScrollPane hbarPolicy="NEVER" prefHeight="673.0" prefWidth="1280.0" vbarPolicy="ALWAYS" />
@@ -57,6 +59,8 @@
                         <ToolBar prefHeight="40.0" prefWidth="200.0">
                           <items>
                             <Button fx:id="btn_pridatPredmet" mnemonicParsing="false" text="Přidat předmět" />
+                              <Button mnemonicParsing="false" text="Editovat předmět" />
+                              <Button mnemonicParsing="false" text="Smazat předmět" />
                           </items>
                         </ToolBar>
                         <ScrollPane hbarPolicy="NEVER" prefHeight="645.0" prefWidth="1280.0" vbarPolicy="ALWAYS" />
@@ -71,6 +75,8 @@
                         <ToolBar prefHeight="40.0" prefWidth="200.0">
                           <items>
                             <Button fx:id="btn_pridatZamestnance" mnemonicParsing="false" text="Přidat zaměstnance" />
+                              <Button mnemonicParsing="false" text="Editovat zaměstnance" />
+                              <Button mnemonicParsing="false" text="Smazat zaměstnance" />
                           </items>
                         </ToolBar>
                         <ScrollPane hbarPolicy="NEVER" prefHeight="665.0" prefWidth="1280.0" vbarPolicy="ALWAYS" />
