@@ -23,6 +23,8 @@ public class GUI_hlavniObrazovkaContoller {
     private Button btn_pridatPredmet;
     @FXML
     private Button btn_pridatZamestnance;
+    
+    private SeznamSkupinek seznamSkupinek;
 
     public GUI_hlavniObrazovkaContoller(){
         StageHlavniObrazovka = new Stage();
@@ -41,6 +43,10 @@ public class GUI_hlavniObrazovkaContoller {
     
     public void showStage(){ //Pro zobrazení stage
         StageHlavniObrazovka.show();
+    }
+    
+    private void falseVisibleButton(){
+        btn_pridatPredmet.setVisible(false);
     }
     
     @FXML
@@ -64,8 +70,9 @@ public class GUI_hlavniObrazovkaContoller {
     }
     
     private void otevriPridatSkupinku(){
-        GUI_pridatSkupinkuController guiPridatSkupinku = new GUI_pridatSkupinkuController();
+        GUI_pridatSkupinkuController guiPridatSkupinku = new GUI_pridatSkupinkuController(this.seznamSkupinek);
         guiPridatSkupinku.showStage();
+        seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();
     }
     
     private void otevriPridatPredmet(){

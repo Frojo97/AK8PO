@@ -4,13 +4,16 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="66.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
             <MenuBar>
               <menus>
@@ -27,14 +30,55 @@
               </menus>
             </MenuBar>
             <ToolBar prefHeight="40.0" prefWidth="200.0" />
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                <Button fx:id="btn_pridatSkupinku" mnemonicParsing="false" text="Přidat skupinku" />
-                <Button fx:id="btn_pridatPredmet" mnemonicParsing="false" text="Přidat předmět" />
-                <Button fx:id="btn_pridatZamestnance" mnemonicParsing="false" text="Přidat zaměstnance" />
-              </items>
-            </ToolBar>
          </children>
       </VBox>
    </top>
+   <center>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Skupinky">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ToolBar prefHeight="40.0" prefWidth="200.0">
+                           <items>
+                            <Button fx:id="btn_pridatSkupinku" mnemonicParsing="false" text="Přidat skupinku" />
+                           </items>
+                        </ToolBar>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="673.0" prefWidth="1280.0" vbarPolicy="ALWAYS" />
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab text="Předměty">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ToolBar prefHeight="40.0" prefWidth="200.0">
+                          <items>
+                            <Button fx:id="btn_pridatPredmet" mnemonicParsing="false" text="Přidat předmět" />
+                          </items>
+                        </ToolBar>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="645.0" prefWidth="1280.0" vbarPolicy="ALWAYS" />
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+            <Tab text="Zaměstnanci">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <ToolBar prefHeight="40.0" prefWidth="200.0">
+                          <items>
+                            <Button fx:id="btn_pridatZamestnance" mnemonicParsing="false" text="Přidat zaměstnance" />
+                          </items>
+                        </ToolBar>
+                        <ScrollPane hbarPolicy="NEVER" prefHeight="665.0" prefWidth="1280.0" vbarPolicy="ALWAYS" />
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </center>
 </BorderPane>

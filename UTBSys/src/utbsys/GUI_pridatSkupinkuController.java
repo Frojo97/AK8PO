@@ -31,9 +31,12 @@ public class GUI_pridatSkupinkuController {
     private ChoiceBox<EnumJazyk> chb_jazyk;
     @FXML
     private Button btn_pridat;
+    private Skupinka novaSkupinka;
+    private SeznamSkupinek seznamSkupinek;
     
-    public GUI_pridatSkupinkuController(){
+    public GUI_pridatSkupinkuController(SeznamSkupinek seznamSkupinek){
         StagePridatSkupinku = new Stage();
+        this.seznamSkupinek = seznamSkupinek;
         
         try {
             FXMLLoader pridatSkupinkuController = new FXMLLoader(getClass().getResource("GUI_pridatSkupinku.fxml"));
@@ -70,7 +73,7 @@ public class GUI_pridatSkupinkuController {
                 rocnik = Integer.parseInt(tf_rocnik.getText());
                 pocetStudentu = Integer.parseInt(tf_pocetStudentu.getText());
                 if (rocnik > 0 && rocnik < 11 && pocetStudentu > -1 && pocetStudentu < 1000){
-                    Skupinka skupinka = new Skupinka(tf_nazevSkupinky.getText(),
+                    novaSkupinka = new Skupinka(tf_nazevSkupinky.getText(),
                         tf_zkratkaSkupinky.getText(),
                         Integer.parseInt(tf_rocnik.getText()),
                         chb_semestr.getValue(),
@@ -91,6 +94,10 @@ public class GUI_pridatSkupinkuController {
         else{
             AlertOkno alert = new AlertOkno('E', "Chyba", "Nevyplnil si, žádné pole!");
         }
+    }
+    
+    public SeznamSkupinek vratSeznamSkupinek(){
+        return seznamSkupinek;
     }
     
     private boolean kontrolaTextField(){
