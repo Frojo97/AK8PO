@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
@@ -23,6 +24,9 @@ public class GUI_hlavniObrazovkaContoller {
     private Button btn_pridatPredmet;
     @FXML
     private Button btn_pridatZamestnance;
+    @FXML
+    private ScrollPane sp_skupinkaOkno;
+    
     
     private SeznamSkupinek seznamSkupinek;
 
@@ -70,9 +74,14 @@ public class GUI_hlavniObrazovkaContoller {
     }
     
     private void otevriPridatSkupinku(){
-        GUI_pridatSkupinkuController guiPridatSkupinku = new GUI_pridatSkupinkuController(this.seznamSkupinek);
+        /*GUI_pridatSkupinkuController guiPridatSkupinku = new GUI_pridatSkupinkuController(this.seznamSkupinek);
         guiPridatSkupinku.showStage();
-        seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();
+        seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();*/
+        GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
+        sp_skupinkaOkno.setContent(gpo_skupinka.getGP_okno());
+        Skupinka sk = new Skupinka("sof", "swi", 1, EnumSemestr.LS, 10, EnumFormaStudia.K, EnumTypStudia.Bc, EnumJazyk.CZ);
+        GUI_stitekSkupinkaController gui = new GUI_stitekSkupinkaController(sk);
+        gpo_skupinka.addStitek(gui);
     }
     
     private void otevriPridatPredmet(){

@@ -47,7 +47,7 @@
                               <Button mnemonicParsing="false" text="Smazat skupinku" />
                            </items>
                         </ToolBar>
-                        <ScrollPane hbarPolicy="NEVER" prefHeight="673.0" prefWidth="1280.0" vbarPolicy="ALWAYS" />
+                        <ScrollPane fx:id="sp_skupinkaOkno" hbarPolicy="NEVER" prefHeight="673.0" prefWidth="1280.0" vbarPolicy="ALWAYS" />
                      </children>
                   </VBox>
                </content>
