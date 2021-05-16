@@ -79,7 +79,7 @@ public class GUI_hlavniObrazovkaContoller {
         seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();*/
         GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
         sp_skupinkaOkno.setContent(gpo_skupinka.getGP_okno());
-        Skupinka sk = new Skupinka("sof", "swi", 1, EnumSemestr.LS, 10, EnumFormaStudia.K, EnumTypStudia.Bc, EnumJazyk.CZ);
+        Skupinka sk = new Skupinka("Softwarové inženýrství", "swi", 1, EnumSemestr.LS, 10, EnumFormaStudia.K, EnumTypStudia.Bc, EnumJazyk.CZ);
         GUI_stitekSkupinkaController gui = new GUI_stitekSkupinkaController(sk);
         gpo_skupinka.addStitek(gui);
     }

@@ -31,6 +31,20 @@ public class GUI_stitekSkupinkaController {
     public GUI_stitekSkupinkaController(Skupinka skupinka){
         loadGUI();
         setData(skupinka);
+        
+        /*String cssLayout = "-fx-border-color: green;\n" +
+                   "-fx-border-insets: 5;\n" +
+                   "-fx-border-width: 3;\n" +
+                   "-fx-border-style: dashed;\n";*/
+        String cssLayout = "-fx-background-color: #d1e7dd;\n" +
+                "-fx-border-color: #bcd0c7;\n" +
+                   "-fx-border-insets: 2;\n" +
+                   "-fx-border-width: 3;\n" +
+                   "-fx-border-style: dashed;\n" +
+                    "-fx-background-insets: 5;\n"
+                   ;
+        
+        vb_skupinkaOkno.setStyle(cssLayout);
     }
     
     private void loadGUI(){
