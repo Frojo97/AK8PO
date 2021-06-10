@@ -26,10 +26,10 @@ public class GUI_hlavniObrazovkaContoller {
     private Button btn_pridatZamestnance;
     @FXML
     private ScrollPane sp_skupinkaOkno;
-    
-    
+    //GUI rozmístění pro skupinku
+    private GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
     private SeznamSkupinek seznamSkupinek;
-
+    
     public GUI_hlavniObrazovkaContoller(){
         StageHlavniObrazovka = new Stage();
         try {
@@ -42,7 +42,9 @@ public class GUI_hlavniObrazovkaContoller {
             StageHlavniObrazovka.setResizable(false);
         } catch (IOException e) {
             e.printStackTrace();
-        } 
+        }
+        //Do ScrollPane okna je přidán GridPaneOkno pro Skupinku
+        sp_skupinkaOkno.setContent(gpo_skupinka.getGP_okno());
     }
     
     public void showStage(){ //Pro zobrazení stage
@@ -74,14 +76,13 @@ public class GUI_hlavniObrazovkaContoller {
     }
     
     private void otevriPridatSkupinku(){
-        /*GUI_pridatSkupinkuController guiPridatSkupinku = new GUI_pridatSkupinkuController(this.seznamSkupinek);
+        //Otevre nove okno na pridani skupinky
+        GUI_pridatSkupinkuController guiPridatSkupinku = new GUI_pridatSkupinkuController(this.seznamSkupinek);
         guiPridatSkupinku.showStage();
-        seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();*/
-        GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
-        sp_skupinkaOkno.setContent(gpo_skupinka.getGP_okno());
-        Skupinka sk = new Skupinka("Softwarové inženýrství", "swi", 1, EnumSemestr.LS, 10, EnumFormaStudia.K, EnumTypStudia.Bc, EnumJazyk.CZ);
-        GUI_stitekSkupinkaController gui = new GUI_stitekSkupinkaController(sk);
-        gpo_skupinka.addStitek(gui);
+        //Vrati seznam
+        seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();
+        //Prida stitek do GridPaneOkno
+        gpo_skupinka.addStitek(new GUI_stitekSkupinkaController(guiPridatSkupinku.vratSkupinku()));
     }
     
     private void otevriPridatPredmet(){

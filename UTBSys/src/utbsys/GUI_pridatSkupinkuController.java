@@ -100,6 +100,10 @@ public class GUI_pridatSkupinkuController {
         return seznamSkupinek;
     }
     
+    public Skupinka vratSkupinku(){
+        return novaSkupinka;
+    }
+    
     private boolean kontrolaTextField(){
         if (!tf_nazevSkupinky.getText().trim().isEmpty() &&
                 !tf_zkratkaSkupinky.getText().trim().isEmpty() &&

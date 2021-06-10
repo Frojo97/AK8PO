@@ -6,27 +6,29 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="549.0" prefWidth="490.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="501.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="28.0" layoutY="50.0" prefWidth="93.0" text="Název předmětu:" />
-      <Label layoutX="28.0" layoutY="93.0" text="Zkratka předmětu:" />
-      <Label layoutX="28.0" layoutY="136.0" text="Počet kreditů za předmět:" />
-      <Label layoutX="28.0" layoutY="179.0" text="Počet týdnů:" />
-      <Label layoutX="28.0" layoutY="222.0" text="Počet přednášek" />
-      <Label layoutX="28.0" layoutY="265.0" text="Počet seminářů:" />
-      <Label layoutX="28.0" layoutY="308.0" text="Zakončení předmětu:" />
-      <Label layoutX="28.0" layoutY="352.0" text="Jazyk předmětu:" />
-      <Label layoutX="28.0" layoutY="401.0" text="Garant předmětu:" />
-      <Label layoutX="28.0" layoutY="444.0" text="Garant předmětu:" />
-      <TextField fx:id="tf_nazevPredmetu" layoutX="210.0" layoutY="46.0" />
-      <TextField fx:id="tf_zkratkaPredmetu" layoutX="210.0" layoutY="89.0" />
-      <TextField fx:id="tf_pocetKreditu" layoutX="210.0" layoutY="132.0" />
-      <TextField fx:id="tf_pocetTydnu" layoutX="210.0" layoutY="175.0" />
-      <TextField fx:id="tf_pocetPrednasek" layoutX="210.0" layoutY="218.0" />
-      <TextField fx:id="tf_pocetSeminaru" layoutX="210.0" layoutY="262.0" />
-      <ChoiceBox fx:id="chb_zakonceniPredmetu" layoutX="210.0" layoutY="304.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="chb_jazykPredmetu" layoutX="210.0" layoutY="348.0" prefWidth="150.0" />
+      <Label layoutX="28.0" layoutY="28.0" prefWidth="93.0" text="Název předmětu:" />
+      <Label layoutX="28.0" layoutY="71.0" text="Zkratka předmětu:" />
+      <Label layoutX="28.0" layoutY="114.0" text="Počet kreditů za předmět:" />
+      <Label layoutX="28.0" layoutY="157.0" text="Počet týdnů:" />
+      <Label layoutX="28.0" layoutY="200.0" text="Počet přednášek" />
+      <Label layoutX="28.0" layoutY="243.0" text="Počet seminářů:" />
+      <Label layoutX="28.0" layoutY="286.0" text="Zakončení předmětu:" />
+      <Label layoutX="28.0" layoutY="329.0" text="Jazyk předmětu:" />
+      <Label layoutX="28.0" layoutY="372.0" text="Jméno vyučujícího:" />
+      <Label layoutX="28.0" layoutY="415.0" text="Garant předmětu:" />
+      <TextField fx:id="tf_nazevPredmetu" layoutX="210.0" layoutY="24.0" />
+      <TextField fx:id="tf_zkratkaPredmetu" layoutX="210.0" layoutY="67.0" />
+      <TextField fx:id="tf_pocetKreditu" layoutX="210.0" layoutY="110.0" />
+      <TextField fx:id="tf_pocetTydnu" layoutX="210.0" layoutY="153.0" />
+      <TextField fx:id="tf_pocetPrednasek" layoutX="210.0" layoutY="196.0" />
+      <TextField fx:id="tf_pocetSeminaru" layoutX="210.0" layoutY="239.0" />
+      <ChoiceBox fx:id="chb_zakonceniPredmetu" layoutX="210.0" layoutY="282.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chb_jazykPredmetu" layoutX="210.0" layoutY="325.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="210.0" layoutY="368.0" prefWidth="150.0" />
+      <ChoiceBox layoutX="210.0" layoutY="411.0" prefWidth="150.0" />
 
-      <Button layoutX="320.0" layoutY="418.0" mnemonicParsing="false" text="Přidat" />
+      <Button layoutX="335.0" layoutY="454.0" mnemonicParsing="false" text="Přidat" />
    </children>
 </AnchorPane>
