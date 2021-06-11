@@ -101,9 +101,9 @@ public class GUI_pridatZamestnanceController {
         return seznamZamestnancu;
     }
     
-    public Zamestnanec vratZamestnance(){
+    /*public Zamestnanec vratZamestnance(){
         return novyZamestnanec;
-    }
+    }*/
     
     private boolean kontrola(){
         if (!tf_jmeno.getText().trim().isEmpty() &&
@@ -122,7 +122,7 @@ public class GUI_pridatZamestnanceController {
         if (!tf_pracTel.getText().trim().isEmpty()){
             if (kontrolaRegTelefonu(tf_pracTel.getText())){
                 if (!tf_soukTel.getText().trim().isEmpty()){
-                    if (kontrolaRegTelefonu(tf_soukEmail.getText())){
+                    if (kontrolaRegTelefonu(tf_soukTel.getText())){
                         return true;
                     }
                     else {

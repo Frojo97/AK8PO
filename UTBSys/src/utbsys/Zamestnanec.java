@@ -36,13 +36,15 @@ public class Zamestnanec {
         return this.titulPred + "" +
                 this.jmeno + " " +
                 this.prijmeni + " " +
-                this.titulZa + "\n" + 
-                this.pracTel + " " + 
-                this.soukTel + " " + 
-                this.pracEmail + " " + 
-                this.soukEmail + " " + 
-                this.kancelar + " " +
-                this.doktorand + " " + 
-                this.uvazek + " ";
+                this.titulZa + "\nPracovní telefon: " + 
+                this.pracTel + "     Pracovní email: " + 
+                this.pracEmail + 
+                (!this.soukTel.isEmpty() ? ("\nSoukromý telefon: " + this.soukTel) : "") + 
+                (!this.soukEmail.isEmpty() ? ("     Soukromý email: " + this.soukEmail) : "") +
+                "\nKancelář: " + 
+                this.kancelar + "     Doktorand: " +
+                (this.doktorand ? "Ano" : "Ne") + 
+                "     Úvazek: " + 
+                this.uvazek + "";
     }
 }

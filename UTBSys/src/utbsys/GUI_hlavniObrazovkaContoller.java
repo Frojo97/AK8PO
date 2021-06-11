@@ -29,7 +29,7 @@ public class GUI_hlavniObrazovkaContoller {
     @FXML
     private ScrollPane sp_skupinkaOkno;
     @FXML
-    private ListView/*<Zamestnanec>*/ lv_zamestnanci;
+    private ListView<Zamestnanec> lv_zamestnanci;
     //GUI rozmístění pro skupinku
     private GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
     private SeznamSkupinek seznamSkupinek = new SeznamSkupinek();
@@ -99,7 +99,6 @@ public class GUI_hlavniObrazovkaContoller {
         GUI_pridatZamestnanceController guiPridatZamestnance = new GUI_pridatZamestnanceController(this.seznamZamestnancu);
         guiPridatZamestnance.showStage();
         seznamZamestnancu = guiPridatZamestnance.vratSeznamZamestnancu();
-        System.out.println(guiPridatZamestnance.vratZamestnance());
         zobrazDataVListView();
     }
     
