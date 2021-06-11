@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -26,9 +28,12 @@ public class GUI_hlavniObrazovkaContoller {
     private Button btn_pridatZamestnance;
     @FXML
     private ScrollPane sp_skupinkaOkno;
+    @FXML
+    private ListView/*<Zamestnanec>*/ lv_zamestnanci;
     //GUI rozmístění pro skupinku
     private GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
-    private SeznamSkupinek seznamSkupinek;
+    private SeznamSkupinek seznamSkupinek = new SeznamSkupinek();
+    private SeznamZamestnancu seznamZamestnancu = new SeznamZamestnancu();
     
     public GUI_hlavniObrazovkaContoller(){
         StageHlavniObrazovka = new Stage();
@@ -91,8 +96,25 @@ public class GUI_hlavniObrazovkaContoller {
     }
     
     private void otevriPridatZamestnance(){
-        GUI_pridatZamestnanceController guiPridatZamestnance = new GUI_pridatZamestnanceController();
+        GUI_pridatZamestnanceController guiPridatZamestnance = new GUI_pridatZamestnanceController(this.seznamZamestnancu);
         guiPridatZamestnance.showStage();
+        seznamZamestnancu = guiPridatZamestnance.vratSeznamZamestnancu();
+        System.out.println(guiPridatZamestnance.vratZamestnance());
+        zobrazDataVListView();
     }
     
+    private void zobrazDataVListView(){ //Zajištuje zobrazení dat v ListView 
+        lv_zamestnanci.setItems(seznamZamestnancu.vratSeznamOL());
+        lv_zamestnanci.setCellFactory(param -> new ListCell<Zamestnanec>() {
+            @Override
+            protected void updateItem(Zamestnanec item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null || item.toString() == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                }
+            }
+        });
+    } 
 }

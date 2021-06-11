@@ -9,4 +9,8 @@ public class SeznamZamestnancu {
     public void pridatDoSeznamu(Zamestnanec zm){ //Přidá nového zamestnance do seznamu
         this.seznamZamestnanec.add(zm);
     }
+    
+    public ObservableList<Zamestnanec> vratSeznamOL(){
+        return seznamZamestnanec;
+    }
 }

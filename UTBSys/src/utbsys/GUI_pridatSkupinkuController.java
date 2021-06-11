@@ -81,6 +81,7 @@ public class GUI_pridatSkupinkuController {
                         chb_formaStudia.getValue(),
                         chb_typStudia.getValue(),
                         chb_jazyk.getValue());
+                    seznamSkupinek.pridatDoSeznamu(novaSkupinka);
                     StagePridatSkupinku.close(); 
                 }
                 else{

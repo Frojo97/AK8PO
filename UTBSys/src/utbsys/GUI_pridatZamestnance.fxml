@@ -11,26 +11,27 @@
    <children>
       <Label layoutX="28.0" layoutY="28.0" text="Titul před jménem:" />
       <TextField fx:id="tf_titulPred" layoutX="210.0" layoutY="24.0" />
-      <Label layoutX="28.0" layoutY="71.0" text="Jméno:" />
+      <Label layoutX="28.0" layoutY="71.0" text="*Jméno:" />
       <TextField fx:id="tf_jmeno" layoutX="210.0" layoutY="67.0" />
-      <Label layoutX="28.0" layoutY="114.0" text="Příjmení:" />
+      <Label layoutX="28.0" layoutY="114.0" text="*Příjmení:" />
       <TextField fx:id="tf_prijmeni" layoutX="210.0" layoutY="110.0" />
       <Label layoutX="28.0" layoutY="157.0" text="Titul za jménem:" />
       <TextField fx:id="tf_titulZa" layoutX="210.0" layoutY="153.0" />
-      <Label layoutX="28.0" layoutY="200.0" text="Pracovní telefon:" />
+      <Label layoutX="28.0" layoutY="200.0" text="*Pracovní telefon:" />
       <Label layoutX="28.0" layoutY="243.0" text="Soukromý telefon:" />
-      <Label layoutX="28.0" layoutY="286.0" text="Pracovní email:" />
+      <Label layoutX="28.0" layoutY="286.0" text="*Pracovní email:" />
       <Label layoutX="28.0" layoutY="329.0" text="Soukromý email:" />
-      <Label layoutX="28.0" layoutY="372.0" text="Kancelář:" />
+      <Label layoutX="28.0" layoutY="372.0" text="*Kancelář:" />
       <TextField fx:id="tf_pracTel" layoutX="210.0" layoutY="196.0" />
       <TextField fx:id="tf_soukTel" layoutX="210.0" layoutY="239.0" />
       <TextField fx:id="tf_pracEmail" layoutX="210.0" layoutY="282.0" />
       <TextField fx:id="tf_soukEmail" layoutX="210.0" layoutY="325.0" />
       <TextField fx:id="tf_kancelar" layoutX="210.0" layoutY="368.0" />
       <Label layoutX="28.0" layoutY="415.0" text="Doktorand:" />
-      <Label layoutX="28.0" layoutY="458.0" text="Úvazek:" />
+      <Label layoutX="28.0" layoutY="458.0" text="*Úvazek:" />
       <CheckBox fx:id="cheb_doktorand" layoutX="210.0" layoutY="411.0" mnemonicParsing="false" />
       <ChoiceBox fx:id="chob_uvazek" layoutX="210.0" layoutY="454.0" prefWidth="150.0" />
       <Button fx:id="btn_pridat" layoutX="334.0" layoutY="494.0" mnemonicParsing="false" text="Přidat" />
+      <Label layoutX="28.0" layoutY="498.0" text="Pole označená hvězdičkou musí být vyplněna!" />
    </children>
 </AnchorPane>
