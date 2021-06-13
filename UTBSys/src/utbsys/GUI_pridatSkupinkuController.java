@@ -94,7 +94,7 @@ public class GUI_pridatSkupinkuController {
             }           
         }
         else{
-            AlertOkno alert = new AlertOkno('E', "Chyba", "Nevyplnil si, žádné pole!");
+            AlertOkno alert = new AlertOkno('E', "Chyba", "Nevyplnil si všechny pole!");
         }
     }
         
