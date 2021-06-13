@@ -1,6 +1,6 @@
 package utbsys;
 
 public enum EnumUvazek {
-    polovicni,
-    plny   
+    polovíční,
+    plný   
 }
