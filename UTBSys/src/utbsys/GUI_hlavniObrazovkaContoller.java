@@ -89,6 +89,7 @@ public class GUI_hlavniObrazovkaContoller {
         btn_pridatSkupinku.setOnAction(event -> otevriPridatSkupinku());
         btn_pridatPredmet.setOnAction(event -> otevriPridatPredmet());
         btn_pridatZamestnance.setOnAction(event -> otevriPridatZamestnance());
+        btn_editovatZamestnance.setOnAction(event -> editaceZamestnance());
         btn_smazatZamestnance.setOnAction(event -> smazaniZamestnance());
     }
     
@@ -167,7 +168,12 @@ public class GUI_hlavniObrazovkaContoller {
     }
     
     private void editaceZamestnance(){
-        
+        GUI_editaceZamestnanceController guiEditovatZamestnance = new GUI_editaceZamestnanceController(this.seznamZamestnancu, lv_zamestnanci.getSelectionModel().getSelectedItem().getID());
+        guiEditovatZamestnance.showStage();
+        seznamZamestnancu = guiEditovatZamestnance.vratSeznamZamestnancu();
+        zobrazDataVListView();
+        lv_zamestnanci.getSelectionModel().clearSelection();
+        setDisableBTNZamestnanec();
     }
     
     private void smazaniZamestnance(){
@@ -176,5 +182,4 @@ public class GUI_hlavniObrazovkaContoller {
         lv_zamestnanci.getSelectionModel().clearSelection();
         setDisableBTNZamestnanec();
     }
-   
 }

@@ -1,7 +1,7 @@
 package utbsys;
 
 public class Zamestnanec {
-    private int ID;
+    private final int ID;
     private String titulPred;
     private String jmeno;
     private String prijmeni;
@@ -16,6 +16,10 @@ public class Zamestnanec {
     
     public Zamestnanec(int ID, String titulPred, String jmeno, String prijmeni, String titulZa, String pracTel, String soukTel, String pracEmail, String soukEmail, String kancelar, boolean doktorand, EnumUvazek uvazek){
         this.ID = ID;
+        setZamestnanec(titulPred, jmeno, prijmeni, titulZa, pracTel, soukTel, pracEmail, soukEmail, kancelar, doktorand, uvazek);
+    }
+    
+    public void setZamestnanec(String titulPred, String jmeno, String prijmeni, String titulZa, String pracTel, String soukTel, String pracEmail, String soukEmail, String kancelar, boolean doktorand, EnumUvazek uvazek){
         this.titulPred = titulPred;
         this.jmeno = jmeno;
         this.prijmeni = prijmeni;
@@ -33,9 +37,49 @@ public class Zamestnanec {
         return this.ID;
     }
     
-    /*public String getJmeno(){
-        return jmeno;
-    }*/
+    public String getTitulPred(){
+        return this.titulPred;
+    }
+    
+    public String getJmeno(){
+        return this.jmeno;
+    }
+    
+    public String getPrijmeni(){
+        return this.prijmeni;
+    }
+    
+    public String getTitulZa(){
+        return titulZa;
+    }
+    
+    public String getPracTel(){
+        return this.pracTel;
+    }
+    
+    public String getSoukTel(){
+        return this.soukTel;
+    }
+    
+    public String getPracEmail(){
+        return this.pracEmail;
+    }
+    
+    public String getSoukEmail(){
+        return this.soukEmail;
+    }
+    
+    public String getKancelar(){
+        return this.kancelar;
+    }
+    
+    public boolean getDoktorand(){
+        return this.doktorand;
+    }
+    
+    public EnumUvazek getUvazek(){
+        return this.uvazek;
+    }
     
     @Override
     public String toString(){

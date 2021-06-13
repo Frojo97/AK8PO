@@ -22,6 +22,24 @@ public class SeznamZamestnancu {
         this.seznamZamestnanec.remove(getZamestnanec(ID));
     }
     
+    public void editaceZamestnance(int ID, Zamestnanec upravenyZamestnanec){
+        for (int i = 0; i < seznamZamestnanec.size(); i++){
+            if (seznamZamestnanec.get(i).getID() == ID){
+                seznamZamestnanec.get(i).setZamestnanec(upravenyZamestnanec.getTitulPred(),
+                        upravenyZamestnanec.getJmeno(),
+                        upravenyZamestnanec.getPrijmeni(),
+                        upravenyZamestnanec.getTitulZa(),
+                        upravenyZamestnanec.getPracTel(),
+                        upravenyZamestnanec.getSoukTel(),
+                        upravenyZamestnanec.getPracEmail(),
+                        upravenyZamestnanec.getSoukEmail(),
+                        upravenyZamestnanec.getKancelar(),
+                        upravenyZamestnanec.getDoktorand(),
+                        upravenyZamestnanec.getUvazek());
+            }
+        }
+    }
+    
     public Zamestnanec getZamestnanec(int ID){ //Vrati danou skupinku pomoci ID
         for (int i = 0; i < seznamZamestnanec.size(); i++){
             if (seznamZamestnanec.get(i).getID() == ID)
