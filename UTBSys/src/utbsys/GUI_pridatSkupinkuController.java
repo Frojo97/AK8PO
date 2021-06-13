@@ -73,14 +73,15 @@ public class GUI_pridatSkupinkuController {
                 rocnik = Integer.parseInt(tf_rocnik.getText());
                 pocetStudentu = Integer.parseInt(tf_pocetStudentu.getText());
                 if (rocnik > 0 && rocnik < 11 && pocetStudentu > -1 && pocetStudentu < 1000){
-                    novaSkupinka = new Skupinka(tf_nazevSkupinky.getText(),
-                        tf_zkratkaSkupinky.getText(),
-                        Integer.parseInt(tf_rocnik.getText()),
-                        chb_semestr.getValue(),
-                        Integer.parseInt(tf_pocetStudentu.getText()),
-                        chb_formaStudia.getValue(),
-                        chb_typStudia.getValue(),
-                        chb_jazyk.getValue());
+                    novaSkupinka = new Skupinka(seznamSkupinek.getNewID(),
+                            tf_nazevSkupinky.getText(),
+                            tf_zkratkaSkupinky.getText(),
+                            Integer.parseInt(tf_rocnik.getText()),
+                            chb_semestr.getValue(),
+                            Integer.parseInt(tf_pocetStudentu.getText()),
+                            chb_formaStudia.getValue(),
+                            chb_typStudia.getValue(),
+                            chb_jazyk.getValue());
                     seznamSkupinek.pridatDoSeznamu(novaSkupinka);
                     StagePridatSkupinku.close(); 
                 }
@@ -96,7 +97,7 @@ public class GUI_pridatSkupinkuController {
             AlertOkno alert = new AlertOkno('E', "Chyba", "Nevyplnil si, žádné pole!");
         }
     }
-    
+        
     public SeznamSkupinek vratSeznamSkupinek(){
         return seznamSkupinek;
     }

@@ -33,7 +33,7 @@ public class Zamestnanec {
     
     @Override
     public String toString(){
-        return this.titulPred + "" +
+        return (this.titulPred.isEmpty() ? "" : (this.titulPred + " " )) +
                 this.jmeno + " " +
                 this.prijmeni + " " +
                 this.titulZa + "\nPracovní telefon: " + 

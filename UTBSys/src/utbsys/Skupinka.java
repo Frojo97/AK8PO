@@ -1,6 +1,7 @@
 package utbsys;
 
 public class Skupinka {
+    private int ID;
     private String nazevSkupinky;
     private String zkratkaSkupinky;
     private int rocnik;
@@ -10,7 +11,8 @@ public class Skupinka {
     private EnumTypStudia typStudia;
     private EnumJazyk jazyk;
     
-    public Skupinka(String nazevSkupinky, String zkratkaSkupinky, int rocnik, EnumSemestr semestr, int pocetStudentu, EnumFormaStudia formaStudia, EnumTypStudia typStudia, EnumJazyk jazyk){
+    public Skupinka(int ID, String nazevSkupinky, String zkratkaSkupinky, int rocnik, EnumSemestr semestr, int pocetStudentu, EnumFormaStudia formaStudia, EnumTypStudia typStudia, EnumJazyk jazyk){
+        this.ID = ID;
         this.nazevSkupinky = nazevSkupinky;
         this.zkratkaSkupinky = zkratkaSkupinky;
         this.rocnik = rocnik;
@@ -21,35 +23,39 @@ public class Skupinka {
         this.jazyk = jazyk;
     }
     
+    public int getID(){
+        return this.ID;
+    }
+    
     public String getNazevSkupinky(){
-        return nazevSkupinky;
+        return this.nazevSkupinky;
     }
     
     public String getZkratkaSkupinky(){
-        return zkratkaSkupinky;
+        return this.zkratkaSkupinky;
     }
     
     public String getRocnik(){
-        return String.valueOf(rocnik);
+        return String.valueOf(this.rocnik);
     }
     
     public String getSemestr(){
-        return semestr.toString();
+        return this.semestr.toString();
     }
     
     public String getPocetStudentu(){
-        return String.valueOf(pocetStudentu);
+        return String.valueOf(this.pocetStudentu);
     }
     
     public String getFormaStudia(){
-        return formaStudia.toString(); 
+        return this.formaStudia.toString(); 
     }
     
     public String getTypStudia(){
-        return typStudia.toString();
+        return this.typStudia.toString();
     }
     
     public String getJazyk(){
-        return jazyk.toString();
+        return this.jazyk.toString();
     }
 }

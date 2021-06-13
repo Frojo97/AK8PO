@@ -2,6 +2,9 @@ package utbsys;
 
 import java.io.IOException;
 import static javafx.application.Platform.exit;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,6 +30,10 @@ public class GUI_hlavniObrazovkaContoller {
     @FXML
     private Button btn_pridatZamestnance;
     @FXML
+    private Button btn_editovatZamestnance;
+    @FXML
+    private Button btn_smazatZamestnance;
+    @FXML
     private ScrollPane sp_skupinkaOkno;
     @FXML
     private ListView<Zamestnanec> lv_zamestnanci;
@@ -50,14 +57,27 @@ public class GUI_hlavniObrazovkaContoller {
         }
         //Do ScrollPane okna je přidán GridPaneOkno pro Skupinku
         sp_skupinkaOkno.setContent(gpo_skupinka.getGP_okno());
+        setDisableBTNZamestnanec();
+        
+        lv_zamestnanci.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Zamestnanec>() {
+            public void changed(ObservableValue<? extends Zamestnanec> observable, Zamestnanec oldValue, Zamestnanec newValue) {
+                setEnableBTNZamestnanec();
+            }
+        });
     }
     
     public void showStage(){ //Pro zobrazení stage
         StageHlavniObrazovka.show();
     }
     
-    private void falseVisibleButton(){
-        btn_pridatPredmet.setVisible(false);
+    private void setDisableBTNZamestnanec(){
+        btn_editovatZamestnance.setDisable(true);
+        btn_smazatZamestnance.setDisable(true);
+    }
+    
+    private void setEnableBTNZamestnanec(){
+        btn_editovatZamestnance.setDisable(false);
+        btn_smazatZamestnance.setDisable(false);
     }
     
     @FXML
@@ -80,21 +100,49 @@ public class GUI_hlavniObrazovkaContoller {
         alertOAplikaci.showAndWait();
     }
     
+    //Skupinka
     private void otevriPridatSkupinku(){
         //Otevre nove okno na pridani skupinky
         GUI_pridatSkupinkuController guiPridatSkupinku = new GUI_pridatSkupinkuController(this.seznamSkupinek);
         guiPridatSkupinku.showStage();
-        //Vrati seznam
-        seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();
-        //Prida stitek do GridPaneOkno
-        gpo_skupinka.addStitek(new GUI_stitekSkupinkaController(guiPridatSkupinku.vratSkupinku()));
+        //Podmínka zajištuje kdybychom nevytvořili novou skupinku
+        if (guiPridatSkupinku.vratSkupinku() != null){
+            //Vrati seznam
+            seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();
+            createStitekSkupinka(guiPridatSkupinku.vratSkupinku());
+        }
     }
     
+    private void createStitekSkupinka(Skupinka newSk){
+        //Prida stitek do GridPaneOkno
+        GUI_stitekSkupinkaController gui_stitekSC = new GUI_stitekSkupinkaController(newSk);
+        //Nastaveni eventů pro buttony
+        gui_stitekSC.mi_editovatSS.setOnAction(event -> editaceStitekSkupinka());
+        gui_stitekSC.mi_odstranitSS.setOnAction(event -> odstranStitekSkupinka(gui_stitekSC.getID()));
+        gpo_skupinka.addStitek(gui_stitekSC);
+    }
+    
+    private void editaceStitekSkupinka(){
+        
+    }
+    
+    private void odstranStitekSkupinka(int ID){
+        gpo_skupinka.deleteStitek(ID);
+        seznamSkupinek.odstranitZeSeznamu(ID);
+        gpo_skupinka.refactorGridPane();
+        ObservableList<Skupinka> sk = seznamSkupinek.getOBSeznam();
+        for (int i = 0; i < sk.size(); i++){
+            createStitekSkupinka(sk.get(i));
+        }   
+    }
+    
+    //Předmět
     private void otevriPridatPredmet(){
         GUI_pridatPredmetController guiPridatPredmet = new GUI_pridatPredmetController();
         guiPridatPredmet.showStage();
     }
     
+    //Zaměstnanec
     private void otevriPridatZamestnance(){
         GUI_pridatZamestnanceController guiPridatZamestnance = new GUI_pridatZamestnanceController(this.seznamZamestnancu);
         guiPridatZamestnance.showStage();
@@ -116,4 +164,6 @@ public class GUI_hlavniObrazovkaContoller {
             }
         });
     } 
+    
+   
 }

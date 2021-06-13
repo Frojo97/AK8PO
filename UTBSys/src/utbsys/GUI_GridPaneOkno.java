@@ -1,5 +1,6 @@
 package utbsys;
 
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 
 public class GUI_GridPaneOkno {
@@ -22,5 +23,28 @@ public class GUI_GridPaneOkno {
             y++;
             x = 0;
         }
+    }
+    
+    public void deleteStitek(int ID){
+        for (final Node node : this.gp_okno.getChildren()) {
+            if (node != null 
+                && node.getId() != null
+                && node.getId().equals(Integer.toString(ID))){
+                this.gp_okno.getChildren().remove(node);
+                if (x == 0 && y > 0){
+                    y = y - 1;
+                    x = 9;                    
+                }
+                else
+                    x = x - 1;
+                break;
+            }
+        }   
+    }
+    
+    public void refactorGridPane(){
+        this.gp_okno.getChildren().clear();
+        x = 0;
+        y = 0;
     }
 }

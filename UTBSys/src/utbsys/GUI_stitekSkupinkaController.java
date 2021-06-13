@@ -6,9 +6,13 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 
 public class GUI_stitekSkupinkaController {
+    private final int ID;
+    @FXML 
+    private VBox vb_okno;
     @FXML
     private Label lbl_nazevSkupinky;
     @FXML
@@ -25,11 +29,17 @@ public class GUI_stitekSkupinkaController {
     private Label lbl_typStudia;
     @FXML
     private Label lbl_jazyk;
+    @FXML
+    public MenuItem mi_editovatSS;
+    @FXML
+    public MenuItem mi_odstranitSS;
     
     private VBox vb_skupinkaOkno;
     
     public GUI_stitekSkupinkaController(Skupinka skupinka){
+        this.ID = skupinka.getID();   
         loadGUI();
+        vb_okno.setId(Integer.toString(ID));
         setData(skupinka);
         
         /*String cssLayout = "-fx-border-color: green;\n" +
@@ -45,6 +55,10 @@ public class GUI_stitekSkupinkaController {
                    ;
         
         vb_skupinkaOkno.setStyle(cssLayout);
+    }
+    
+    public int getID(){
+        return this.ID;
     }
     
     private void loadGUI(){
@@ -65,13 +79,10 @@ public class GUI_stitekSkupinkaController {
         lbl_pocetStudentu.setText(skupinka.getPocetStudentu());
         lbl_formaStudia.setText(skupinka.getFormaStudia());
         lbl_typStudia.setText(skupinka.getTypStudia());
-        lbl_jazyk.setText(skupinka.getJazyk());
-        
+        lbl_jazyk.setText(skupinka.getJazyk());       
     }
     
     public VBox getStitek(){
         return vb_skupinkaOkno;
     }
-    
-    
 }
