@@ -96,17 +96,7 @@ public class SouborSkupinka {
             tfe.printStackTrace();
         }
     }
-    
-    private int ID;
-    private String nazevSkupinky;
-    private String zkratkaSkupinky;
-    private int rocnik;
-    private EnumSemestr semestr;
-    private int pocetStudentu;
-    private EnumFormaStudia formaStudia;
-    private EnumTypStudia typStudia;
-    private EnumJazyk jazyk;
-    
+ 
     public SeznamSkupinek nacteniSkupinky(){
         SeznamSkupinek seznamSkupinek = new SeznamSkupinek();
         try{
