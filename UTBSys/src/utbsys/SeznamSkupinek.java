@@ -6,6 +6,14 @@ import javafx.collections.ObservableList;
 public class SeznamSkupinek {
     private final ObservableList<Skupinka> seznamSkupinky = FXCollections.observableArrayList();
     
+    public int getNewID(){ //Vrátí novou ID hodnotu pro novou skupinku
+        if (seznamSkupinky.isEmpty())
+            return 1;
+        else{
+            return seznamSkupinky.get(seznamSkupinky.size()-1).getID() + 1;
+        }
+    }
+    
     public void pridatDoSeznamu(Skupinka sk){ //Přidá nové skupinky do seznamu
         this.seznamSkupinky.add(sk);
     }
@@ -20,14 +28,6 @@ public class SeznamSkupinek {
                 return seznamSkupinky.get(i); 
         }
         return null;
-    }
-    
-    public int getNewID(){ //Vrátí novou ID hodnotu pro novou skupinku
-        if (seznamSkupinky.isEmpty())
-            return 1;
-        else{
-            return seznamSkupinky.get(seznamSkupinky.size()-1).getID() + 1;
-        }
     }
     
     public ObservableList<Skupinka> getOBSeznam(){

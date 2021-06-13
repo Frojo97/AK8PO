@@ -74,7 +74,7 @@ public class GUI_pridatZamestnanceController {
         if (kontrola()){
             if (kontrolaTelefonu()){
                 if (kontrolaEmailu()){
-                    novyZamestnanec = new Zamestnanec(
+                    novyZamestnanec = new Zamestnanec( seznamZamestnancu.getNewID(),
                             tf_titulPred.getText(),
                             tf_jmeno.getText(),
                             tf_prijmeni.getText(),

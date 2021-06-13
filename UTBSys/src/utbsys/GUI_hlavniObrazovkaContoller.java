@@ -89,6 +89,7 @@ public class GUI_hlavniObrazovkaContoller {
         btn_pridatSkupinku.setOnAction(event -> otevriPridatSkupinku());
         btn_pridatPredmet.setOnAction(event -> otevriPridatPredmet());
         btn_pridatZamestnance.setOnAction(event -> otevriPridatZamestnance());
+        btn_smazatZamestnance.setOnAction(event -> smazaniZamestnance());
     }
     
     private void otevriOAplikaciDialog(){ //Akce informace pro tlačítko mi_oAplikaci
@@ -163,7 +164,17 @@ public class GUI_hlavniObrazovkaContoller {
                 }
             }
         });
-    } 
+    }
     
+    private void editaceZamestnance(){
+        
+    }
+    
+    private void smazaniZamestnance(){
+        seznamZamestnancu.odstranitZeSeznamu(lv_zamestnanci.getSelectionModel().getSelectedItem().getID());
+        zobrazDataVListView();
+        lv_zamestnanci.getSelectionModel().clearSelection();
+        setDisableBTNZamestnanec();
+    }
    
 }

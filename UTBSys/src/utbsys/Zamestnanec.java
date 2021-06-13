@@ -1,6 +1,7 @@
 package utbsys;
 
 public class Zamestnanec {
+    private int ID;
     private String titulPred;
     private String jmeno;
     private String prijmeni;
@@ -13,7 +14,8 @@ public class Zamestnanec {
     private boolean doktorand;
     private EnumUvazek uvazek;
     
-    public Zamestnanec(String titulPred, String jmeno, String prijmeni, String titulZa, String pracTel, String soukTel, String pracEmail, String soukEmail, String kancelar, boolean doktorand, EnumUvazek uvazek){
+    public Zamestnanec(int ID, String titulPred, String jmeno, String prijmeni, String titulZa, String pracTel, String soukTel, String pracEmail, String soukEmail, String kancelar, boolean doktorand, EnumUvazek uvazek){
+        this.ID = ID;
         this.titulPred = titulPred;
         this.jmeno = jmeno;
         this.prijmeni = prijmeni;
@@ -27,9 +29,13 @@ public class Zamestnanec {
         this.uvazek = uvazek;
     }
     
-    public String getJmeno(){
-        return jmeno;
+    public int getID(){
+        return this.ID;
     }
+    
+    /*public String getJmeno(){
+        return jmeno;
+    }*/
     
     @Override
     public String toString(){
