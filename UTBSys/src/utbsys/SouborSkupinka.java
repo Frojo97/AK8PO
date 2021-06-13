@@ -2,6 +2,7 @@ package utbsys;
 
 import java.io.File;
 import java.io.IOException;
+import javafx.collections.ObservableList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,48 +35,52 @@ public class SouborSkupinka {
         return nazevXML;
     }
     
-    public void ulozeniSkupinky(){
-      /*  try{
+    public void ulozeniSkupinky(ObservableList<Skupinka> seznamSkupinek){
+        try{
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
             Document document = documentBuilder.newDocument();
             Element hlavniElement = document.createElement("skupiny");
             document.appendChild(hlavniElement);
             
-            for(int i = 0; i < seznamUsers.size(); i++){
+            for(int i = 0; i < seznamSkupinek.size(); i++){
                 Element e_skupina = document.createElement("skupina");
                 hlavniElement.appendChild(e_skupina);
                 
+                Element e_id = document.createElement("id");
+                e_id.appendChild(document.createTextNode(String.valueOf(seznamSkupinek.get(i).getID())));
+                e_skupina.appendChild(e_id);
+                
                 Element e_nazevSkupiny = document.createElement("nazevSkupiny");
-                e_nazevSkupiny.appendChild(document.createTextNode(seznamUsers.get(i).getLogin()));
+                e_nazevSkupiny.appendChild(document.createTextNode(seznamSkupinek.get(i).getNazevSkupinky()));
                 e_skupina.appendChild(e_nazevSkupiny);
                 
                 Element e_zkratkaSkupiny = document.createElement("zkratkaSkupiny");
-                e_zkratkaSkupiny.appendChild(document.createTextNode(seznamUsers.get(i).getHeslo()));
+                e_zkratkaSkupiny.appendChild(document.createTextNode(seznamSkupinek.get(i).getZkratkaSkupinky()));
                 e_skupina.appendChild(e_zkratkaSkupiny);
                 
                 Element e_rocnik = document.createElement("rocnik");
-                e_rocnik.appendChild(document.createTextNode());
+                e_rocnik.appendChild(document.createTextNode(seznamSkupinek.get(i).getRocnik()));
                 e_skupina.appendChild(e_rocnik);
                 
                 Element e_semestr = document.createElement("semestr");
-                e_semestr.appendChild(document.createTextNode());
+                e_semestr.appendChild(document.createTextNode(seznamSkupinek.get(i).getSemestr()));
                 e_skupina.appendChild(e_semestr);
                 
                 Element e_pocetStudentu = document.createElement("pocetStudentu");
-                e_pocetStudentu.appendChild(document.createTextNode());
+                e_pocetStudentu.appendChild(document.createTextNode(seznamSkupinek.get(i).getPocetStudentu()));
                 e_skupina.appendChild(e_pocetStudentu);
                 
                 Element e_formaStudia = document.createElement("formaStudia");
-                e_formaStudia.appendChild(document.createTextNode());
+                e_formaStudia.appendChild(document.createTextNode(seznamSkupinek.get(i).getFormaStudia()));
                 e_skupina.appendChild(e_formaStudia);
                 
                 Element e_typStudia = document.createElement("typStudia");
-                e_typStudia.appendChild(document.createTextNode());
+                e_typStudia.appendChild(document.createTextNode(seznamSkupinek.get(i).getTypStudia()));
                 e_skupina.appendChild(e_typStudia);
                 
                 Element e_jazyk = document.createElement("jazyk");
-                e_jazyk.appendChild(document.createTextNode());
+                e_jazyk.appendChild(document.createTextNode(seznamSkupinek.get(i).getJazyk()));
                 e_skupina.appendChild(e_jazyk);
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
@@ -89,15 +94,26 @@ public class SouborSkupinka {
             tce.printStackTrace();
         }catch (TransformerException tfe) {
             tfe.printStackTrace();
-        }*/
-        
+        }
     }
     
-    public void nacteniSkupinky(){
-        
-       /* try{
+    private int ID;
+    private String nazevSkupinky;
+    private String zkratkaSkupinky;
+    private int rocnik;
+    private EnumSemestr semestr;
+    private int pocetStudentu;
+    private EnumFormaStudia formaStudia;
+    private EnumTypStudia typStudia;
+    private EnumJazyk jazyk;
+    
+    public SeznamSkupinek nacteniSkupinky(){
+        SeznamSkupinek seznamSkupinek = new SeznamSkupinek();
+        try{
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+            if(!new File(getNazevXML()).exists())
+                return new SeznamSkupinek();
             Document document = documentBuilder.parse(new File(getNazevXML()));
             document.getDocumentElement().normalize();
             Element root = document.getDocumentElement();
@@ -106,22 +122,22 @@ public class SouborSkupinka {
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
-                    seznamUzivatelu.pridatDoSeznamu(new Skupinka(element.getElementsByTagName("nazevSkupiny").item(0).getTextContent(), 
+                    seznamSkupinek.pridatDoSeznamu(new Skupinka( Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()),
+                            element.getElementsByTagName("nazevSkupiny").item(0).getTextContent(), 
                             element.getElementsByTagName("zkratkaSkupiny").item(0).getTextContent(),
                             Integer.parseInt(element.getElementsByTagName("rocnik").item(0).getTextContent()),
+                            EnumSemestr.valueOf(element.getElementsByTagName("semestr").item(0).getTextContent()),
                             Integer.parseInt(element.getElementsByTagName("pocetStudentu").item(0).getTextContent()),
-                            element.getElementsByTagName("semestr").item(0).getTextContent(),
-                            element.getElementsByTagName("pocetStudentu").item(0).getTextContent(),
-                            element.getElementsByTagName("formaStudia").item(0).getTextContent(),
-                            element.getElementsByTagName("typStudia").item(0).getTextContent(),
-                            element.getElementsByTagName("jazyk").item(0).getTextContent()   
+                            EnumFormaStudia.valueOf(element.getElementsByTagName("formaStudia").item(0).getTextContent()),
+                            EnumTypStudia.valueOf(element.getElementsByTagName("typStudia").item(0).getTextContent()),
+                            EnumJazyk.valueOf(element.getElementsByTagName("jazyk").item(0).getTextContent())   
                     ));
                 }
             }
-            return seznamUzivatelu;
+            return seznamSkupinek;
         }catch (SAXException | IOException |ParserConfigurationException ex){
            ex.printStackTrace(); 
         }
-        return null;    */
+        return null;   
     }
 }

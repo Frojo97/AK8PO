@@ -64,6 +64,12 @@ public class GUI_hlavniObrazovkaContoller {
                 setEnableBTNZamestnanec();
             }
         });
+        
+        seznamSkupinek = SouborSkupinka.SK().nacteniSkupinky();
+        ObservableList<Skupinka> oblSkupinka = seznamSkupinek.getOBSeznam();
+        for(int i = 0; i < oblSkupinka.size(); i++){
+            createStitekSkupinka(oblSkupinka.get(i));
+        }
     }
     
     public void showStage(){ //Pro zobrazení stage
@@ -112,6 +118,7 @@ public class GUI_hlavniObrazovkaContoller {
             //Vrati seznam
             seznamSkupinek = guiPridatSkupinku.vratSeznamSkupinek();
             createStitekSkupinka(guiPridatSkupinku.vratSkupinku());
+            SouborSkupinka.SK().ulozeniSkupinky(seznamSkupinek.getOBSeznam());
         }
     }
     
@@ -135,7 +142,8 @@ public class GUI_hlavniObrazovkaContoller {
         ObservableList<Skupinka> sk = seznamSkupinek.getOBSeznam();
         for (int i = 0; i < sk.size(); i++){
             createStitekSkupinka(sk.get(i));
-        }   
+        }
+        SouborSkupinka.SK().ulozeniSkupinky(seznamSkupinek.getOBSeznam());
     }
     
     //Předmět
