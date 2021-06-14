@@ -70,6 +70,9 @@ public class GUI_hlavniObrazovkaContoller {
         for(int i = 0; i < oblSkupinka.size(); i++){
             createStitekSkupinka(oblSkupinka.get(i));
         }
+        
+        seznamZamestnancu = SouborZamestnanec.SZ().nacteniZamestnancu();
+        zobrazDataVListView();
     }
     
     public void showStage(){ //Pro zobrazení stage
@@ -158,6 +161,7 @@ public class GUI_hlavniObrazovkaContoller {
         guiPridatZamestnance.showStage();
         seznamZamestnancu = guiPridatZamestnance.vratSeznamZamestnancu();
         zobrazDataVListView();
+        SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
     }
     
     private void zobrazDataVListView(){ //Zajištuje zobrazení dat v ListView 
@@ -182,6 +186,7 @@ public class GUI_hlavniObrazovkaContoller {
         zobrazDataVListView();
         lv_zamestnanci.getSelectionModel().clearSelection();
         setDisableBTNZamestnanec();
+        SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
     }
     
     private void smazaniZamestnance(){
@@ -189,5 +194,6 @@ public class GUI_hlavniObrazovkaContoller {
         zobrazDataVListView();
         lv_zamestnanci.getSelectionModel().clearSelection();
         setDisableBTNZamestnanec();
+        SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
     }
 }

@@ -35,7 +35,7 @@ public class SouborZamestnanec {
         return nazevXML;
     }
     
-    public void ulozenitZamestnance(ObservableList<Zamestnanec> seznamZamestnancu){
+    public void ulozeniZamestnancu(ObservableList<Zamestnanec> seznamZamestnancu){
         try{
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
@@ -83,7 +83,11 @@ public class SouborZamestnanec {
                 e_soukEmail.appendChild(document.createTextNode(seznamZamestnancu.get(i).getSoukEmail()));
                 e_zamestnanec.appendChild(e_soukEmail);
 
-		Element e_doktorand = document.createElement("doktorand");
+		Element e_kancelar = document.createElement("kancelar");
+                e_kancelar.appendChild(document.createTextNode(seznamZamestnancu.get(i).getKancelar()));
+                e_zamestnanec.appendChild(e_kancelar);
+                
+                Element e_doktorand = document.createElement("doktorand");
                 e_doktorand.appendChild(document.createTextNode(Boolean.toString(seznamZamestnancu.get(i).getDoktorand())));
                 e_zamestnanec.appendChild(e_doktorand);
                 
@@ -105,7 +109,7 @@ public class SouborZamestnanec {
         }
     }
  
-    public SeznamZamestnancu nacteniSkupinky(){
+    public SeznamZamestnancu nacteniZamestnancu(){
         SeznamZamestnancu seznamZamestnancu = new SeznamZamestnancu();
         try{
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
