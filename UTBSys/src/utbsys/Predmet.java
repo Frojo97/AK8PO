@@ -25,4 +25,36 @@ public class Predmet {
         this.zakonceni = zakonceni;
         this.jazyk = jazyk;
     }
+    
+    public String getNazevPredmetu(){
+	return this.nazevPredmetu;
+    }
+
+    public String getZkratkaPredmetu(){
+	return this.zkratkaPredmetu;
+    }
+
+    public int getPocetKreditu(){
+	return this.pocetKreditu;
+    }
+
+    public int getPocetTydnu(){
+	return this.pocetTydnu;
+    }
+
+    public int getPocetPrednasek(){
+	return this.pocetPrednasek;
+    }
+
+    public int getPocetSeminaru(){
+	return this.pocetSeminaru;
+    }
+
+    public EnumZakonceni getZakonceni(){
+	return this.zakonceni;
+    }
+
+    public EnumJazyk getJazyk(){
+	return this.jazyk;
+    }
 }
