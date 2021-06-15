@@ -28,6 +28,10 @@ public class GUI_hlavniObrazovkaContoller {
     @FXML
     private Button btn_pridatPredmet;
     @FXML
+    private Button btn_editovatPredmet;
+    @FXML
+    private Button btn_smazatPredmet;
+    @FXML
     private Button btn_pridatZamestnance;
     @FXML
     private Button btn_editovatZamestnance;
@@ -40,6 +44,7 @@ public class GUI_hlavniObrazovkaContoller {
     //GUI rozmístění pro skupinku
     private GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
     private SeznamSkupinek seznamSkupinek = new SeznamSkupinek();
+    private SeznamPredmetu seznamPredmetu = new SeznamPredmetu();
     private SeznamZamestnancu seznamZamestnancu = new SeznamZamestnancu();
     
     public GUI_hlavniObrazovkaContoller(){
@@ -71,12 +76,25 @@ public class GUI_hlavniObrazovkaContoller {
             createStitekSkupinka(oblSkupinka.get(i));
         }
         
+        seznamPredmetu = SouborPredmet.SP().nacteniPredmetu();
+        setDisableBTNPredmet();
+        
         seznamZamestnancu = SouborZamestnanec.SZ().nacteniZamestnancu();
         zobrazDataVListView();
     }
     
     public void showStage(){ //Pro zobrazení stage
         StageHlavniObrazovka.show();
+    }
+    
+    private void setDisableBTNPredmet(){
+        btn_editovatPredmet.setDisable(true);
+        btn_smazatPredmet.setDisable(true);
+    }
+    
+    private void setEnableBTNPredmet(){
+        btn_editovatPredmet.setDisable(false);
+        btn_smazatPredmet.setDisable(false);
     }
     
     private void setDisableBTNZamestnanec(){
@@ -151,8 +169,13 @@ public class GUI_hlavniObrazovkaContoller {
     
     //Předmět
     private void otevriPridatPredmet(){
-        GUI_pridatPredmetController guiPridatPredmet = new GUI_pridatPredmetController();
+        GUI_pridatPredmetController guiPridatPredmet = new GUI_pridatPredmetController(seznamPredmetu);
         guiPridatPredmet.showStage();
+        
+        if (guiPridatPredmet.vratPredmet() != null){
+            seznamPredmetu = guiPridatPredmet.vratSeznamPredmetu();
+            SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.getOBSeznam());
+        }       
     }
     
     //Zaměstnanec

@@ -35,7 +35,7 @@ public class SouborPredmet {
         return nazevXML;
     }
     
-   /* public void ulozeniPredmetu(ObservableList<Predmet> seznamPredmetu){
+    public void ulozeniPredmetu(ObservableList<Predmet> seznamPredmetu){
         try{
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
@@ -43,45 +43,49 @@ public class SouborPredmet {
             Element hlavniElement = document.createElement("predmety");
             document.appendChild(hlavniElement);
             
-            for(int i = 0; i < seznamPredmet.size(); i++){
+            for(int i = 0; i < seznamPredmetu.size(); i++){
                 Element e_predmet = document.createElement("predmet");
                 hlavniElement.appendChild(e_predmet);
-                
-                Element e_id = document.createElement("id");
-                e_id.appendChild(document.createTextNode(String.valueOf(seznamPredmet.get(i).getID())));
-                e_predmet.appendChild(e_id);
                 
                 Element e_nazevPredmetu = document.createElement("nazevPredmetu");
                 e_nazevPredmetu.appendChild(document.createTextNode(seznamPredmetu.get(i).getNazevPredmetu()));
                 e_predmet.appendChild(e_nazevPredmetu);
                 
                 Element e_zkratkaPredmetu = document.createElement("zkratkaPredmetu");
-                e_zkratkaPredmetu.appendChild(document.createTextNode(seznamPredmetu.get(i).getZkratkaSkupinky()));
+                e_zkratkaPredmetu.appendChild(document.createTextNode(seznamPredmetu.get(i).getZkratkaPredmetu()));
                 e_predmet.appendChild(e_zkratkaPredmetu);
                 
                 Element e_pocetKreditu = document.createElement("pocetKreditu");
-                e_pocetKreditu.appendChild(document.createTextNode(seznamPredmetu.get(i).getPocetKreditu()));
+                e_pocetKreditu.appendChild(document.createTextNode(String.valueOf(seznamPredmetu.get(i).getPocetKreditu())));
                 e_predmet.appendChild(e_pocetKreditu);
                 
                 Element e_pocetTydnu = document.createElement("pocetTydnu");
-                e_pocetTydnu.appendChild(document.createTextNode(seznamPredmetu.get(i).getPocetTydnu()));
+                e_pocetTydnu.appendChild(document.createTextNode(String.valueOf(seznamPredmetu.get(i).getPocetTydnu())));
                 e_predmet.appendChild(e_pocetTydnu);
                 
-                Element e_pocetPrednasek = document.createElement("pocetPrednasek");
-                e_pocetPrednasek.appendChild(document.createTextNode(seznamPredmetu.get(i).getPocetStudentu()));
-                e_predmet.appendChild(e_pocetPrednasek);
+                Element e_hodinPrednasek = document.createElement("hodinPrednasek");
+                e_hodinPrednasek.appendChild(document.createTextNode(String.valueOf(seznamPredmetu.get(i).getHodinPrednasek())));
+                e_predmet.appendChild(e_hodinPrednasek);
                 
-                Element e_pocetSeminaru = document.createElement("pocetSeminaru");
-                e_pocetSeminaru.appendChild(document.createTextNode(seznamPredmetu.get(i).getPocetSeminaru()));
-                e_predmet.appendChild(e_pocetSeminaru);
+                Element e_hodinCviceni = document.createElement("hodinCviceni");
+                e_hodinCviceni.appendChild(document.createTextNode(String.valueOf(seznamPredmetu.get(i).getHodinPrednasek())));
+                e_predmet.appendChild(e_hodinCviceni);
+                
+                Element e_hodinSeminaru = document.createElement("hodinSeminaru");
+                e_hodinSeminaru.appendChild(document.createTextNode(String.valueOf(seznamPredmetu.get(i).getHodinSeminaru())));
+                e_predmet.appendChild(e_hodinSeminaru);
                 
                 Element e_zakonceni = document.createElement("zakonceni");
-                e_zakonceni.appendChild(document.createTextNode(seznamPredmetu.get(i).getZakonceni()));
+                e_zakonceni.appendChild(document.createTextNode(seznamPredmetu.get(i).getZakonceni().toString()));
                 e_predmet.appendChild(e_zakonceni);
                 
                 Element e_jazyk = document.createElement("jazyk");
-                e_jazyk.appendChild(document.createTextNode(seznamPredmetu.get(i).getJazyk()));
+                e_jazyk.appendChild(document.createTextNode(seznamPredmetu.get(i).getJazyk().toString()));
                 e_predmet.appendChild(e_jazyk);
+                
+                Element e_velikostTridy = document.createElement("velikostTridy");
+                e_velikostTridy.appendChild(document.createTextNode(String.valueOf(seznamPredmetu.get(i).getVelikostTridy())));
+                e_predmet.appendChild(e_velikostTridy);  
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -103,24 +107,25 @@ public class SouborPredmet {
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
             DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
             if(!new File(getNazevXML()).exists())
-                return new SeznamSkupinek();
+                return new SeznamPredmetu();
             Document document = documentBuilder.parse(new File(getNazevXML()));
             document.getDocumentElement().normalize();
             Element root = document.getDocumentElement();
-            NodeList nList = document.getElementsByTagName("skupina");           
+            NodeList nList = document.getElementsByTagName("predmet");           
             for (int i = 0; i < nList.getLength(); i++){
                 Node node = nList.item(i);
                 if (node.getNodeType() == Node.ELEMENT_NODE){
                     Element element = (Element) node;
-                    seznamPredmetu.pridatDoSeznamu(new Predmet( Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()),
-                            element.getElementsByTagName("nazevPredmetu").item(0).getTextContent(), 
+                    seznamPredmetu.pridatDoSeznamu(new Predmet( element.getElementsByTagName("nazevPredmetu").item(0).getTextContent(), 
                             element.getElementsByTagName("zkratkaPredmetu").item(0).getTextContent(),
                             Integer.parseInt(element.getElementsByTagName("pocetKreditu").item(0).getTextContent()),
                             Integer.parseInt(element.getElementsByTagName("pocetTydnu").item(0).getTextContent()),
-                            Integer.parseInt(element.getElementsByTagName("pocetPrednasek").item(0).getTextContent()),
-                            Integer.parseInt(element.getElementsByTagName("pocetSeminaru").item(0).getTextContent()),
+                            Integer.parseInt(element.getElementsByTagName("hodinPrednasek").item(0).getTextContent()),
+                            Integer.parseInt(element.getElementsByTagName("hodinCviceni").item(0).getTextContent()),
+                            Integer.parseInt(element.getElementsByTagName("hodinSeminaru").item(0).getTextContent()),
                             EnumZakonceni.valueOf(element.getElementsByTagName("zakonceni").item(0).getTextContent()),
-                            EnumJazyk.valueOf(element.getElementsByTagName("jazyk").item(0).getTextContent())   
+                            EnumJazyk.valueOf(element.getElementsByTagName("jazyk").item(0).getTextContent()),
+                            Integer.parseInt(element.getElementsByTagName("velikostTridy").item(0).getTextContent())
                     ));
                 }
             }
@@ -129,5 +134,5 @@ public class SouborPredmet {
            ex.printStackTrace(); 
         }
         return null;   
-    }*/
+    }
 }

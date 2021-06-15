@@ -3,27 +3,29 @@ package utbsys;
 import javafx.collections.ObservableList;
 
 public class Predmet {
-    private int ID;
     private String nazevPredmetu;
     private String zkratkaPredmetu;
     private int pocetKreditu;
     private int pocetTydnu;
-    private int pocetPrednasek;
-    private int pocetSeminaru;
+    private int hodinPrednasek;
+    private int hodinCviceni;
+    private int hodinSeminaru;
     private EnumZakonceni zakonceni;
     private EnumJazyk jazyk;
+    private int velikostTridy;
     private ObservableList<Skupinka> seznamSkupin;
     
-    public Predmet(int ID, String nazevPredmetu, String zkratkaPredmetu, int pocetKreditu, int pocetTydnu, int pocetPrednasek, int pocetSeminaru, EnumZakonceni zakonceni, EnumJazyk jazyk){
-        this.ID = ID;
+    public Predmet(String nazevPredmetu, String zkratkaPredmetu, int pocetKreditu, int pocetTydnu, int hodinPrednasek, int hodinCviceni, int hodinSeminaru, EnumZakonceni zakonceni, EnumJazyk jazyk, int velikostTridy){
         this.nazevPredmetu = nazevPredmetu;
         this.zkratkaPredmetu = zkratkaPredmetu;
         this.pocetKreditu = pocetKreditu;
         this.pocetTydnu = pocetTydnu;
-        this.pocetPrednasek = pocetPrednasek;
-        this.pocetSeminaru = pocetSeminaru;
+        this.hodinPrednasek = hodinPrednasek;
+        this.hodinCviceni = hodinCviceni;
+        this.hodinSeminaru = hodinSeminaru;
         this.zakonceni = zakonceni;
         this.jazyk = jazyk;
+        this.velikostTridy = velikostTridy;
     }
     
     public String getNazevPredmetu(){
@@ -42,12 +44,16 @@ public class Predmet {
 	return this.pocetTydnu;
     }
 
-    public int getPocetPrednasek(){
-	return this.pocetPrednasek;
+    public int getHodinPrednasek(){
+	return this.hodinPrednasek;
+    }
+    
+    public int getHodinCviceni(){
+	return this.hodinCviceni;
     }
 
-    public int getPocetSeminaru(){
-	return this.pocetSeminaru;
+    public int getHodinSeminaru(){
+	return this.hodinSeminaru;
     }
 
     public EnumZakonceni getZakonceni(){
@@ -56,5 +62,9 @@ public class Predmet {
 
     public EnumJazyk getJazyk(){
 	return this.jazyk;
+    }
+    
+    public int getVelikostTridy(){
+	return this.velikostTridy;
     }
 }
