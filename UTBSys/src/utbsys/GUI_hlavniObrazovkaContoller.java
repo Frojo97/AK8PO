@@ -187,6 +187,8 @@ public class GUI_hlavniObrazovkaContoller {
             seznamPredmetu = guiPridatPredmet.vratSeznamPredmetu();
             zobrazDataVListViewPredmet();
             SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.vratSeznamOL());
+            Predmet pt = guiPridatPredmet.vratPredmet();
+            //if (pt.getHodinPrednasek() > 0) //vyhodnoti a zavolá továrnu na vytvoreni prednasky, poté vyhodnotí a založí potřebná cvičení/semináře,... 
         }       
     }
     
