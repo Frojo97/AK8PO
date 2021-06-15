@@ -17,6 +17,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.runtime.options.Options;
 
 public class GUI_pridatPredmetController implements Initializable {
     private final Stage StagePridatPredmet;
@@ -77,7 +78,10 @@ public class GUI_pridatPredmetController implements Initializable {
         
     private void pridatPredmet(){
         if (kontrolaTextIsEmpty()){
-            novyPredmet = new Predmet(tf_nazevPredmetu.getText(),
+            if (chb_pocetTydnu.getValue() == 1 && chb_velikostTridy.getValue() == 0 ||
+                chb_pocetTydnu.getValue() == 14 && chb_velikostTridy.getValue() == 24 ||
+                chb_pocetTydnu.getValue() == 14 && chb_velikostTridy.getValue() == 12){
+                novyPredmet = new Predmet(tf_nazevPredmetu.getText(),
                     tf_zkratkaPredmetu.getText(),
                     s_pocetKreditu.getValue(),
                     chb_pocetTydnu.getValue(),
@@ -87,14 +91,18 @@ public class GUI_pridatPredmetController implements Initializable {
                     chb_zakonceniPredmetu.getValue(),
                     chb_jazykPredmetu.getValue(),
                     chb_velikostTridy.getValue()         
-            );
-            if (!seznamPredmetu.zjistiZdaExistuje(novyPredmet)){
-                seznamPredmetu.pridatDoSeznamu(novyPredmet);
-                StagePridatPredmet.close();
+                );
+                if (!seznamPredmetu.zjistiZdaExistuje(novyPredmet)){
+                    seznamPredmetu.pridatDoSeznamu(novyPredmet);
+                    StagePridatPredmet.close();
+                }
+                else {
+                    AlertOkno alert = new AlertOkno('E', "Chyba", "Daný předmět se zkratkou už existuje!");
+                }
             }
             else {
-                AlertOkno alert = new AlertOkno('E', "Chyba", "Daný předmět se zkratkou už existuje!");
-            }
+                AlertOkno alert = new AlertOkno('E', "Chyba", "Nesprávná kombinace počet tydnů a velikosti třídy!\nPro kombi studium je počet týdnů = 1 a velikost třídy = 0\nPro prezenční studium je počet týdnů = 14 a velikost třídy = 24 nebo 12");
+            }    
         }
         else {
             AlertOkno alert = new AlertOkno('E', "Chyba", "Nevyplnil si všechny pole!");
