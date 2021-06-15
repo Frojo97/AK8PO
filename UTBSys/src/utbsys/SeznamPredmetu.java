@@ -10,7 +10,7 @@ public class SeznamPredmetu {
         this.seznamPredmetu.add(pt);
     }
     
-    public ObservableList<Predmet> getOBSeznam(){
+    public ObservableList<Predmet> vratSeznamOL(){
         return seznamPredmetu;
     }
 }

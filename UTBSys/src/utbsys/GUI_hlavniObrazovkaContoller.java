@@ -40,6 +40,8 @@ public class GUI_hlavniObrazovkaContoller {
     @FXML
     private ScrollPane sp_skupinkaOkno;
     @FXML
+    private ListView<Predmet> lv_predmet;
+    @FXML
     private ListView<Zamestnanec> lv_zamestnanci;
     //GUI rozmístění pro skupinku
     private GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
@@ -62,14 +64,7 @@ public class GUI_hlavniObrazovkaContoller {
         }
         //Do ScrollPane okna je přidán GridPaneOkno pro Skupinku
         sp_skupinkaOkno.setContent(gpo_skupinka.getGP_okno());
-        setDisableBTNZamestnanec();
-        
-        lv_zamestnanci.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Zamestnanec>() {
-            public void changed(ObservableValue<? extends Zamestnanec> observable, Zamestnanec oldValue, Zamestnanec newValue) {
-                setEnableBTNZamestnanec();
-            }
-        });
-        
+             
         seznamSkupinek = SouborSkupinka.SK().nacteniSkupinky();
         ObservableList<Skupinka> oblSkupinka = seznamSkupinek.getOBSeznam();
         for(int i = 0; i < oblSkupinka.size(); i++){
@@ -78,9 +73,23 @@ public class GUI_hlavniObrazovkaContoller {
         
         seznamPredmetu = SouborPredmet.SP().nacteniPredmetu();
         setDisableBTNPredmet();
+        zobrazDataVListViewPredmet();
         
         seznamZamestnancu = SouborZamestnanec.SZ().nacteniZamestnancu();
-        zobrazDataVListView();
+        setDisableBTNZamestnanec();
+        zobrazDataVListViewZamestnanec();
+
+        lv_predmet.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Predmet>() {
+            public void changed(ObservableValue<? extends Predmet> observable, Predmet oldValue, Predmet newValue) {
+                setEnableBTNPredmet();
+            }
+        });
+        
+        lv_zamestnanci.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Zamestnanec>() {
+            public void changed(ObservableValue<? extends Zamestnanec> observable, Zamestnanec oldValue, Zamestnanec newValue) {
+                setEnableBTNZamestnanec();
+            }
+        });
     }
     
     public void showStage(){ //Pro zobrazení stage
@@ -174,8 +183,24 @@ public class GUI_hlavniObrazovkaContoller {
         
         if (guiPridatPredmet.vratPredmet() != null){
             seznamPredmetu = guiPridatPredmet.vratSeznamPredmetu();
-            SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.getOBSeznam());
+            zobrazDataVListViewPredmet();
+            SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.vratSeznamOL());
         }       
+    }
+    
+    private void zobrazDataVListViewPredmet(){ //Zajištuje zobrazení dat v ListView 
+        lv_predmet.setItems(seznamPredmetu.vratSeznamOL());
+        lv_predmet.setCellFactory(param -> new ListCell<Predmet>() {
+            @Override
+            protected void updateItem(Predmet item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null || item.toString() == null) {
+                    setText(null);
+                } else {
+                    setText(item.toString());
+                }
+            }
+        });
     }
     
     //Zaměstnanec
@@ -183,11 +208,11 @@ public class GUI_hlavniObrazovkaContoller {
         GUI_pridatZamestnanceController guiPridatZamestnance = new GUI_pridatZamestnanceController(this.seznamZamestnancu);
         guiPridatZamestnance.showStage();
         seznamZamestnancu = guiPridatZamestnance.vratSeznamZamestnancu();
-        zobrazDataVListView();
+        zobrazDataVListViewZamestnanec();
         SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
     }
     
-    private void zobrazDataVListView(){ //Zajištuje zobrazení dat v ListView 
+    private void zobrazDataVListViewZamestnanec(){ //Zajištuje zobrazení dat v ListView 
         lv_zamestnanci.setItems(seznamZamestnancu.vratSeznamOL());
         lv_zamestnanci.setCellFactory(param -> new ListCell<Zamestnanec>() {
             @Override
@@ -206,7 +231,7 @@ public class GUI_hlavniObrazovkaContoller {
         GUI_editaceZamestnanceController guiEditovatZamestnance = new GUI_editaceZamestnanceController(this.seznamZamestnancu, lv_zamestnanci.getSelectionModel().getSelectedItem().getID());
         guiEditovatZamestnance.showStage();
         seznamZamestnancu = guiEditovatZamestnance.vratSeznamZamestnancu();
-        zobrazDataVListView();
+        zobrazDataVListViewZamestnanec();
         lv_zamestnanci.getSelectionModel().clearSelection();
         setDisableBTNZamestnanec();
         SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
@@ -214,7 +239,7 @@ public class GUI_hlavniObrazovkaContoller {
     
     private void smazaniZamestnance(){
         seznamZamestnancu.odstranitZeSeznamu(lv_zamestnanci.getSelectionModel().getSelectedItem().getID());
-        zobrazDataVListView();
+        zobrazDataVListViewZamestnanec();
         lv_zamestnanci.getSelectionModel().clearSelection();
         setDisableBTNZamestnanec();
         SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());

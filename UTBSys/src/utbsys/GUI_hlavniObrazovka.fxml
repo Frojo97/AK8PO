@@ -66,7 +66,7 @@
                               <Button fx:id="btn_smazatPredmet" mnemonicParsing="false" text="Smazat předmět" />
                           </items>
                         </ToolBar>
-                        <ListView prefHeight="656.0" prefWidth="1280.0" />
+                        <ListView fx:id="lv_predmet" prefHeight="656.0" prefWidth="1280.0" />
                      </children>
                   </VBox>
                </content>

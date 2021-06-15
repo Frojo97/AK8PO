@@ -74,12 +74,7 @@ public class GUI_pridatPredmetController implements Initializable {
     public void showStage(){ //Pro zobrazení stage
         StagePridatPredmet.showAndWait();
     }
-    
-    /*@FXML
-    private void initialize() { //Inicializace jednotlivých komponent z fxml a přiřazení eventů
-        btn_pridat.setOnAction(event -> pridatPredmet());
-    }*/
-    
+        
     private void pridatPredmet(){
         if (kontrolaTextIsEmpty()){
             novyPredmet = new Predmet(tf_nazevPredmetu.getText(),
