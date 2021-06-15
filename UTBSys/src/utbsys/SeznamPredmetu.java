@@ -10,6 +10,18 @@ public class SeznamPredmetu {
         this.seznamPredmetu.add(pt);
     }
     
+    public void odstranitZeSeznamu(String zkratkaP){
+        this.seznamPredmetu.remove(getPredmet(zkratkaP));
+    }
+    
+    public Predmet getPredmet(String zkratkaP){ //Vrati danou skupinku pomoci ID
+        for (int i = 0; i < seznamPredmetu.size(); i++){
+            if (seznamPredmetu.get(i).getZkratkaPredmetu().equals(zkratkaP))
+                return seznamPredmetu.get(i); 
+        }
+        return null;
+    }
+    
     public ObservableList<Predmet> vratSeznamOL(){
         return seznamPredmetu;
     }

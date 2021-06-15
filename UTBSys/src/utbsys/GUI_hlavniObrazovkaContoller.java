@@ -124,6 +124,7 @@ public class GUI_hlavniObrazovkaContoller {
         mi_oAplikaci.setOnAction(event -> otevriOAplikaciDialog());
         btn_pridatSkupinku.setOnAction(event -> otevriPridatSkupinku());
         btn_pridatPredmet.setOnAction(event -> otevriPridatPredmet());
+        btn_smazatPredmet.setOnAction(event -> smazaniPredmetu());
         btn_pridatZamestnance.setOnAction(event -> otevriPridatZamestnance());
         btn_editovatZamestnance.setOnAction(event -> editaceZamestnance());
         btn_smazatZamestnance.setOnAction(event -> smazaniZamestnance());
@@ -201,6 +202,18 @@ public class GUI_hlavniObrazovkaContoller {
                 }
             }
         });
+    }
+    
+    private void editacePredmetu(){
+        
+    }
+    
+    private void smazaniPredmetu(){
+        seznamPredmetu.odstranitZeSeznamu(lv_predmet.getSelectionModel().getSelectedItem().getZkratkaPredmetu());
+        zobrazDataVListViewPredmet();
+        lv_predmet.getSelectionModel().clearSelection();
+        setDisableBTNPredmet();
+        SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.vratSeznamOL());
     }
     
     //Zaměstnanec
