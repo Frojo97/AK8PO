@@ -48,6 +48,7 @@ public class GUI_hlavniObrazovkaContoller {
     private SeznamSkupinek seznamSkupinek = new SeznamSkupinek();
     private SeznamPredmetu seznamPredmetu = new SeznamPredmetu();
     private SeznamZamestnancu seznamZamestnancu = new SeznamZamestnancu();
+    private SeznamPracovnichStitku seznamPracovnichStitku = new SeznamPracovnichStitku();
     
     public GUI_hlavniObrazovkaContoller(){
         StageHlavniObrazovka = new Stage();
