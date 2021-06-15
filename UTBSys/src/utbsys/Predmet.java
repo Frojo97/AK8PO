@@ -67,4 +67,13 @@ public class Predmet {
     public int getVelikostTridy(){
 	return this.velikostTridy;
     }
+    
+    @Override
+    public String toString(){
+        return this.zkratkaPredmetu + " - " + this.nazevPredmetu +  " - " + this.jazyk + "    Počet kreditů: " + this.pocetKreditu + "\n" + 
+                "Počet týdnů: " + this.pocetTydnu + "    Hodin přednášek: " + this.hodinPrednasek + 
+                "    Hodin cvičení: " + this.hodinCviceni + "    Hodin seminářů: " + this.hodinSeminaru + "\n" +
+                "Zakončení: " + this.zakonceni + "\n" + 
+                "Velikost třídy: " + this.velikostTridy;
+    }
 }
