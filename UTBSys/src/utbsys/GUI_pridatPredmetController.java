@@ -88,8 +88,13 @@ public class GUI_pridatPredmetController implements Initializable {
                     chb_jazykPredmetu.getValue(),
                     chb_velikostTridy.getValue()         
             );
-            seznamPredmetu.pridatDoSeznamu(novyPredmet);
-            StagePridatPredmet.close();
+            if (!seznamPredmetu.zjistiZdaExistuje(novyPredmet)){
+                seznamPredmetu.pridatDoSeznamu(novyPredmet);
+                StagePridatPredmet.close();
+            }
+            else {
+                AlertOkno alert = new AlertOkno('E', "Chyba", "Daný předmět se zkratkou už existuje!");
+            }
         }
         else {
             AlertOkno alert = new AlertOkno('E', "Chyba", "Nevyplnil si všechny pole!");
