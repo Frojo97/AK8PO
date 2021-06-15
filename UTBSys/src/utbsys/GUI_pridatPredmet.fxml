@@ -12,23 +12,23 @@
       <Label layoutX="28.0" layoutY="71.0" text="Zkratka předmětu:" />
       <Label layoutX="28.0" layoutY="114.0" text="Počet kreditů za předmět:" />
       <Label layoutX="28.0" layoutY="157.0" text="Počet týdnů:" />
-      <Label layoutX="28.0" layoutY="200.0" text="Počet přednášek" />
-      <Label layoutX="28.0" layoutY="243.0" text="Počet seminářů:" />
-      <Label layoutX="28.0" layoutY="286.0" text="Zakončení předmětu:" />
-      <Label layoutX="28.0" layoutY="329.0" text="Jazyk předmětu:" />
-      <Label layoutX="28.0" layoutY="372.0" text="Jméno vyučujícího:" />
-      <Label layoutX="28.0" layoutY="415.0" text="Garant předmětu:" />
+      <Label layoutX="28.0" layoutY="200.0" text="Hodiny přednášek:" />
+      <Label layoutX="28.0" layoutY="243.0" text="Hodiny cvičení:" />
+      <Label layoutX="28.0" layoutY="286.0" text="Hodiny seminářů:" />
+      <Label layoutX="28.0" layoutY="329.0" text="Zakončení předmětu:" />
+      <Label layoutX="28.0" layoutY="372.0" text="Jazyk předmětu:" />
+      <Label layoutX="28.0" layoutY="415.0" text="Seznam skupin:" />
       <TextField fx:id="tf_nazevPredmetu" layoutX="210.0" layoutY="24.0" />
       <TextField fx:id="tf_zkratkaPredmetu" layoutX="210.0" layoutY="67.0" />
       <TextField fx:id="tf_pocetKreditu" layoutX="210.0" layoutY="110.0" />
       <TextField fx:id="tf_pocetTydnu" layoutX="210.0" layoutY="153.0" />
-      <TextField fx:id="tf_pocetPrednasek" layoutX="210.0" layoutY="196.0" />
-      <TextField fx:id="tf_pocetSeminaru" layoutX="210.0" layoutY="239.0" />
-      <ChoiceBox fx:id="chb_zakonceniPredmetu" layoutX="210.0" layoutY="282.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="chb_jazykPredmetu" layoutX="210.0" layoutY="325.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="210.0" layoutY="368.0" prefWidth="150.0" />
+      <TextField fx:id="tf_hodinyPrednasek" layoutX="210.0" layoutY="196.0" />
+      <TextField fx:id="tf_hodinyCviceni" layoutX="210.0" layoutY="239.0" />
+      <TextField fx:id="tf_hodinySeminaru" layoutX="210.0" layoutY="282.0" />
+      <ChoiceBox fx:id="chb_zakonceniPredmetu" layoutX="210.0" layoutY="325.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="chb_jazykPredmetu" layoutX="210.0" layoutY="368.0" prefWidth="150.0" />
       <ChoiceBox layoutX="210.0" layoutY="411.0" prefWidth="150.0" />
-
-      <Button layoutX="335.0" layoutY="454.0" mnemonicParsing="false" text="Přidat" />
+      <Button fx:id="btn_pridat" layoutX="335.0" layoutY="454.0" mnemonicParsing="false" text="Přidat" />
+      
    </children>
 </AnchorPane>

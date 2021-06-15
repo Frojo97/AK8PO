@@ -22,9 +22,11 @@ public class GUI_pridatPredmetController {
     @FXML
     private TextField tf_pocetTydnu;
     @FXML
-    private TextField tf_pocetPrednasek;
+    private TextField tf_hodinyPrednasek;
     @FXML
-    private TextField tf_pocetSeminaru;
+    private TextField tf_hodinyCviceni;
+    @FXML
+    private TextField tf_hodinySeminaru;
     @FXML
     private ChoiceBox<EnumZakonceni> chb_zakonceniPredmetu;
     @FXML
@@ -61,8 +63,24 @@ public class GUI_pridatPredmetController {
     
     private void pridatPredmet(){
         if (kontrolaTextIsEmpty()){
+            int pocetKreditu;
+            int pocetTydnu;
+            int hodinyPrednasek;
+            int hodinyCviceni;
+            int hodinySeminaru;
             try {
+                pocetKreditu = Integer.parseInt(tf_pocetKreditu.getText());
+                pocetTydnu = Integer.parseInt(tf_pocetTydnu.getText());
+                hodinyPrednasek = Integer.parseInt(tf_hodinyPrednasek.getText());
+                hodinyCviceni = Integer.parseInt(tf_hodinyCviceni.getText());
+                hodinySeminaru = Integer.parseInt(tf_hodinySeminaru.getText());
                 
+                
+                
+                
+                /*if (pocetKreditu => 0 && pocetKreditu < 10 && pocetTydnu > 0 && pocetTydnu < 15 && hodinyPrednasek => 0 && hodinyPrednasek < 10 && hodinyCviceni => 0 && hodinyCviceni < 10 && hodinySeminaru => 0 && hodinySeminaru < 10){
+                    
+                }*/
             }
             catch (NumberFormatException e){
                 AlertOkno alert = new AlertOkno('E', "Chyba", "Nebyla správně zadána číselná hodnota!");
@@ -78,8 +96,9 @@ public class GUI_pridatPredmetController {
                 !tf_zkratkaPredmetu.getText().trim().isEmpty() &&
                 !tf_pocetKreditu.getText().trim().isEmpty() &&
                 !tf_pocetTydnu.getText().trim().isEmpty() &&
-                !tf_pocetPrednasek.getText().trim().isEmpty() &&
-                !tf_pocetSeminaru.getText().trim().isEmpty() &&
+                !tf_hodinyPrednasek.getText().trim().isEmpty() &&
+                !tf_hodinyCviceni.getText().trim().isEmpty() &&
+                !tf_hodinySeminaru.getText().trim().isEmpty() &&
                 chb_zakonceniPredmetu.getValue() != null &&
                 chb_jazykPredmetu.getValue() != null) 
             return true;
