@@ -50,7 +50,24 @@ public class GUI_pracovniStitekController{
         lbl_typStitku.setText(pracovniStitek.getTypStitku().toString());
         lbl_pocetStudentu.setText(String.valueOf(pracovniStitek.getPocetStudentu()));
         lbl_pocetHodin.setText(String.valueOf(pracovniStitek.getPocetHodin()));
-        lbl_pocetTydnu.setText(String.valueOf(pracovniStitek.getPocetTydnu()));       
+        lbl_pocetTydnu.setText(String.valueOf(pracovniStitek.getPocetTydnu()));
+        nastavBarvu(pracovniStitek);
+    }
+    
+    private void nastavBarvu(PracovniStitek pracovniStitek){
+        if (!pracovniStitek.getPredmetID().isEmpty() && pracovniStitek.getZamestnanecID() > 0){
+            String cssLayout = "-fx-background-color: #d1e7dd;\n" +
+                "-fx-border-color: #bcd0c7;\n" +
+                   "-fx-border-insets: 2;\n" +
+                   "-fx-border-width: 3;\n" +
+                   "-fx-border-style: dashed;\n" +
+                    "-fx-background-insets: 5;\n"
+                   ;
+            vb_stitekOkno.setStyle(cssLayout);
+        }
+        else if (!pracovniStitek.getPredmetID().isEmpty() && pracovniStitek.getZamestnanecID() == 0){
+            
+        }
     }
     
     public VBox getStitek(){

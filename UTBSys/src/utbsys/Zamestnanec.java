@@ -13,6 +13,8 @@ public class Zamestnanec {
     private String kancelar;
     private boolean doktorand;
     private EnumUvazek uvazek;
+    private double pracBody;
+    private double pracBodyAJ;
     
     public Zamestnanec(int ID, String titulPred, String jmeno, String prijmeni, String titulZa, String pracTel, String soukTel, String pracEmail, String soukEmail, String kancelar, boolean doktorand, EnumUvazek uvazek){
         this.ID = ID;
