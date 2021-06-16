@@ -15,13 +15,17 @@ public class SeznamPracovnichStitku {
             if (seznamPracovnichStitku.get(i).getNazev().equals(upravenyPracStitek.getNazev())){
                 seznamPracovnichStitku.get(i).setPracovniStitek(upravenyPracStitek.getZamestnanecID(),
                         upravenyPracStitek.getPredmetID(),
+                        upravenyPracStitek.getTypStitku(),
                         upravenyPracStitek.getPocetStudentu(),
                         upravenyPracStitek.getPocetHodin(),
                         upravenyPracStitek.getPocetTydnu(),
-                        upravenyPracStitek.getJazyk(),
-                        upravenyPracStitek.getPocetBodu()
+                        upravenyPracStitek.getJazyk()
                 );
             }
         }
+    }
+    
+    public ObservableList<PracovniStitek> vratSeznamOL(){
+        return seznamPracovnichStitku;
     }
 }

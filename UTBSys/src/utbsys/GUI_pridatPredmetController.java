@@ -17,7 +17,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import jdk.nashorn.internal.runtime.options.Options;
 
 public class GUI_pridatPredmetController implements Initializable {
     private final Stage StagePridatPredmet;

@@ -43,12 +43,16 @@ public class GUI_hlavniObrazovkaContoller {
     private ListView<Predmet> lv_predmet;
     @FXML
     private ListView<Zamestnanec> lv_zamestnanci;
+    @FXML
+    private ScrollPane sp_pracovniStitky;
     //GUI rozmístění pro skupinku
-    private GUI_GridPaneOkno gpo_skupinka = new GUI_GridPaneOkno();
+    private GUI_GridPaneOknoSkupinka gpo_skupinka = new GUI_GridPaneOknoSkupinka();
+    private GUI_GridPaneOknoPracovniStitek gpo_pracovniStitky = new GUI_GridPaneOknoPracovniStitek();
     private SeznamSkupinek seznamSkupinek = new SeznamSkupinek();
     private SeznamPredmetu seznamPredmetu = new SeznamPredmetu();
     private SeznamZamestnancu seznamZamestnancu = new SeznamZamestnancu();
     private SeznamPracovnichStitku seznamPracovnichStitku = new SeznamPracovnichStitku();
+    private VahyPracBodu vahyPracBodu;
     
     public GUI_hlavniObrazovkaContoller(){
         StageHlavniObrazovka = new Stage();
@@ -65,6 +69,7 @@ public class GUI_hlavniObrazovkaContoller {
         }
         //Do ScrollPane okna je přidán GridPaneOkno pro Skupinku
         sp_skupinkaOkno.setContent(gpo_skupinka.getGP_okno());
+        sp_pracovniStitky.setContent(gpo_pracovniStitky.getGP_okno());
              
         seznamSkupinek = SouborSkupinka.SK().nacteniSkupinky();
         ObservableList<Skupinka> oblSkupinka = seznamSkupinek.getOBSeznam();
@@ -79,6 +84,14 @@ public class GUI_hlavniObrazovkaContoller {
         seznamZamestnancu = SouborZamestnanec.SZ().nacteniZamestnancu();
         setDisableBTNZamestnanec();
         zobrazDataVListViewZamestnanec();
+        
+        vahyPracBodu = SouborVahyBodu.SVB().nacteniVahyBodu();
+        
+        seznamPracovnichStitku = SouborPracovniStitek.SPS().nacteniPracovnichStitku();
+        ObservableList<PracovniStitek> oblPracovni = seznamPracovnichStitku.vratSeznamOL();
+        for (int i = 0; i < oblPracovni.size(); i++){
+            createPracovniStitek(oblPracovni.get(i));
+        }
 
         lv_predmet.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Predmet>() {
             public void changed(ObservableValue<? extends Predmet> observable, Predmet oldValue, Predmet newValue) {
@@ -188,8 +201,24 @@ public class GUI_hlavniObrazovkaContoller {
             zobrazDataVListViewPredmet();
             SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.vratSeznamOL());
             Predmet pt = guiPridatPredmet.vratPredmet();
-            //if (pt.getHodinPrednasek() > 0) //vyhodnoti a zavolá továrnu na vytvoreni prednasky, poté vyhodnotí a založí potřebná cvičení/semináře,... 
+            if (pt.getHodinPrednasek() > 0){
+                PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Přednáška " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.přednáška, 20, pt.getPocetTydnu(), pt.getHodinPrednasek(), pt.getJazyk(), vahyPracBodu);
+                //seznamPracovnichStitku.pridatDoSeznamu(TovarnaNaStitky.TNS().vytvorPracovniStitek("Přednáška " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.přednáška, 20, pt.getPocetTydnu(), pt.getHodinPrednasek(), pt.getJazyk()));
+                seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                createPracovniStitek(docastnyStitek);
+            }
+            
+            SouborPracovniStitek.SPS().ulozeniPracovnihoStitku(seznamPracovnichStitku.vratSeznamOL());
+            //vyhodnoti a zavolá továrnu na vytvoreni prednasky, poté vyhodnotí a založí potřebná cvičení/semináře,... 
         }       
+    }
+    
+    private void createPracovniStitek(PracovniStitek pracovniStitek){
+        pracovniStitek.vypocetBodu(vahyPracBodu);
+        GUI_pracovniStitekController gui_pracovniStitek = new GUI_pracovniStitekController(pracovniStitek);
+       /* gui_stitekSC.mi_editovatSS.setOnAction(event -> editaceStitekSkupinka());
+        gui_stitekSC.mi_odstranitSS.setOnAction(event -> odstranStitekSkupinka(gui_stitekSC.getID()));*/
+        gpo_pracovniStitky.addStitek(gui_pracovniStitek);
     }
     
     private void zobrazDataVListViewPredmet(){ //Zajištuje zobrazení dat v ListView 
