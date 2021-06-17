@@ -210,21 +210,93 @@ public class GUI_hlavniObrazovkaContoller {
             zobrazDataVListViewPredmet();
             SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.vratSeznamOL());
             Predmet pt = guiPridatPredmet.vratPredmet();
+            
+            //Přednáška je pro všechny stejná ohledne generování
+            if (pt.getHodinPrednasek() > 0){
+                PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Přednáška " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.přednáška, pt.getPocetStudentuOL(), pt.getHodinPrednasek(),  pt.getPocetTydnu(),  pt.getJazyk(), vahyPracBodu);
+                seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                createPracovniStitek(docastnyStitek);
+            }
+            
             if (pt.getPocetTydnu() == 1 && pt.getVelikostTridy() == 0){
-                if (pt.getHodinPrednasek() > 0){
-                    PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Přednáška " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.přednáška, pt.getPocetStudentuOL(), pt.getHodinPrednasek(),  pt.getPocetTydnu(),  pt.getJazyk(), vahyPracBodu);
-                    seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
-                    createPracovniStitek(docastnyStitek);
-                }
                 if (pt.getHodinCviceni() > 0){
                     PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Cvičení " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.cvičení, pt.getPocetStudentuOL(), pt.getHodinCviceni(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
                     seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
                     createPracovniStitek(docastnyStitek);
                 }
                 if (pt.getHodinSeminaru()> 0){
-                    PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Seminář " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.cvičení, pt.getPocetStudentuOL(), pt.getHodinSeminaru(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                    PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Seminář " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.seminář, pt.getPocetStudentuOL(), pt.getHodinSeminaru(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
                     seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
                     createPracovniStitek(docastnyStitek);
+                }
+            }
+            else {
+                if (pt.getHodinCviceni() > 0){
+                    double pocetStudentu = Double.valueOf(pt.getPocetStudentuOL());
+                    double velikostTridy = Double.valueOf(pt.getVelikostTridy());
+                    double pocetStitku = Math.ceil(pocetStudentu / velikostTridy);
+                    double pocetStudentuNaStitku = Math.ceil(pocetStudentu / pocetStitku);
+                    int pocetStitkuInt = (int) pocetStitku;
+                    int pocetStudentuNaStitkuInt = (int) pocetStudentuNaStitku; 
+                    if ((pocetStitkuInt * pocetStudentuNaStitkuInt) == pt.getPocetStudentuOL()){
+                        for (int i = 0; i < pocetStitkuInt; i++){
+                            PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Cvičení " + pt.getZkratkaPredmetu() + " " + i + 1, pt.getZkratkaPredmetu(), EnumTypStitku.cvičení, pocetStudentuNaStitkuInt, pt.getHodinCviceni(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                            seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                            createPracovniStitek(docastnyStitek);
+                        }
+                    }
+                    else{
+                        int pocetNavic = pocetStudentuNaStitkuInt * pocetStitkuInt;
+                        int navic = pocetNavic - pt.getPocetStudentuOL();
+                        int oStudNavic = pocetStitkuInt - navic;
+                        int odKdyI = pocetStitkuInt - oStudNavic;
+                        for (int i = 0; i < pocetStitku; i++){
+                            if (i >= odKdyI){
+                                PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Cvičení " + pt.getZkratkaPredmetu() + " " + i + 1, pt.getZkratkaPredmetu(), EnumTypStitku.cvičení, pocetStudentuNaStitkuInt - 1, pt.getHodinCviceni(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                                seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                                createPracovniStitek(docastnyStitek); 
+                            }
+                            else{
+                                PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Cvičení " + pt.getZkratkaPredmetu() + " " + i + 1, pt.getZkratkaPredmetu(), EnumTypStitku.cvičení, pocetStudentuNaStitkuInt, pt.getHodinCviceni(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                                seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                                createPracovniStitek(docastnyStitek); 
+                            }    
+                        }
+                    }
+                }
+                if (pt.getHodinSeminaru()> 0){
+                    double pocetStudentu = Double.valueOf(pt.getPocetStudentuOL());
+                    double velikostTridy = Double.valueOf(pt.getVelikostTridy());
+                    double pocetStitku = Math.ceil(pocetStudentu / velikostTridy);
+                    double pocetStudentuNaStitku = Math.ceil(pocetStudentu / pocetStitku);
+                    int pocetStitkuInt = (int) pocetStitku;
+                    int pocetStudentuNaStitkuInt = (int) pocetStudentuNaStitku; 
+                    if ((pocetStitku * pocetStudentuNaStitku) == pt.getPocetStudentuOL()){
+                        for (int i = 0; i < pocetStitku; i++){
+                            PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Seminář " + pt.getZkratkaPredmetu() + " " + i + 1, pt.getZkratkaPredmetu(), EnumTypStitku.seminář, pocetStudentuNaStitkuInt, pt.getHodinSeminaru(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                            seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                            createPracovniStitek(docastnyStitek);
+                        }
+                    }
+                    else{
+                        int pocetNavic = pocetStudentuNaStitkuInt * pocetStitkuInt;
+                        int navic = pocetNavic - pt.getPocetStudentuOL();
+                        int oStudNavic = pocetStitkuInt - navic;
+                        int odKdyI = pocetStitkuInt - oStudNavic;
+                        for (int i = 0; i < pocetStitku; i++){
+                            if (i >= odKdyI){
+                                PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Seminář " + pt.getZkratkaPredmetu() + " " + i + 1, pt.getZkratkaPredmetu(), EnumTypStitku.seminář, pocetStudentuNaStitkuInt - 1, pt.getHodinSeminaru(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                                seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                                createPracovniStitek(docastnyStitek); 
+                            }
+                            else{
+                                PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Seminář " + pt.getZkratkaPredmetu() + i + 1, pt.getZkratkaPredmetu(), EnumTypStitku.seminář, pocetStudentuNaStitkuInt, pt.getHodinSeminaru(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                                seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                                createPracovniStitek(docastnyStitek); 
+                            }    
+                        }
+                    }
+    
                 }
             }
             
