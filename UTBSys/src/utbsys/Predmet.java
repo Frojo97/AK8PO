@@ -81,6 +81,13 @@ public class Predmet {
         return this.seznamSkupin;
     }
     
+    public int getPocetStudentuOL(){
+        int pocet = 0;
+        for (int i = 0; i < seznamSkupin.size(); i++)
+            pocet = pocet + Integer.valueOf(seznamSkupin.get(i).getPocetStudentu());
+        return pocet;
+    }
+    
     @Override
     public String toString(){
         return this.zkratkaPredmetu + " - " + this.nazevPredmetu +  " - " + this.jazyk + "    Počet kreditů: " + this.pocetKreditu + "\n" + 

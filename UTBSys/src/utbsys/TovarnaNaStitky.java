@@ -11,9 +11,9 @@ public class TovarnaNaStitky {
         return TNS;
     }
     
-    public PracovniStitek vytvorPracovniStitek(String nazev, String predmetID, EnumTypStitku typStitku, int pocetStudentu, int pocetTydnu, int pocetHodin, EnumJazyk jazyk, VahyPracBodu vahy){
+    public PracovniStitek vytvorPracovniStitek(String nazev, String predmetID, EnumTypStitku typStitku, int pocetStudentu, int pocetHodin, int pocetTydnu, EnumJazyk jazyk, VahyPracBodu vahy){
         PracovniStitek pracStitek;
-        pracStitek = new PracovniStitek(nazev, 0, predmetID, typStitku, pocetStudentu, pocetTydnu, pocetHodin, jazyk);
+        pracStitek = new PracovniStitek(nazev, 0, predmetID, typStitku, pocetStudentu, pocetHodin, pocetTydnu, jazyk);
         return pracStitek;
     } 
 }

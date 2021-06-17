@@ -210,11 +210,22 @@ public class GUI_hlavniObrazovkaContoller {
             zobrazDataVListViewPredmet();
             SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.vratSeznamOL());
             Predmet pt = guiPridatPredmet.vratPredmet();
-            if (pt.getHodinPrednasek() > 0){
-                PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Přednáška " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.přednáška, 20, pt.getPocetTydnu(), pt.getHodinPrednasek(), pt.getJazyk(), vahyPracBodu);
-                //seznamPracovnichStitku.pridatDoSeznamu(TovarnaNaStitky.TNS().vytvorPracovniStitek("Přednáška " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.přednáška, 20, pt.getPocetTydnu(), pt.getHodinPrednasek(), pt.getJazyk()));
-                seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
-                createPracovniStitek(docastnyStitek);
+            if (pt.getPocetTydnu() == 1 && pt.getVelikostTridy() == 0){
+                if (pt.getHodinPrednasek() > 0){
+                    PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Přednáška " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.přednáška, pt.getPocetStudentuOL(), pt.getHodinPrednasek(),  pt.getPocetTydnu(),  pt.getJazyk(), vahyPracBodu);
+                    seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                    createPracovniStitek(docastnyStitek);
+                }
+                if (pt.getHodinCviceni() > 0){
+                    PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Cvičení " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.cvičení, pt.getPocetStudentuOL(), pt.getHodinCviceni(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                    seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                    createPracovniStitek(docastnyStitek);
+                }
+                if (pt.getHodinSeminaru()> 0){
+                    PracovniStitek docastnyStitek = TovarnaNaStitky.TNS().vytvorPracovniStitek("Seminář " + pt.getZkratkaPredmetu(), pt.getZkratkaPredmetu(), EnumTypStitku.cvičení, pt.getPocetStudentuOL(), pt.getHodinSeminaru(), pt.getPocetTydnu(), pt.getJazyk(), vahyPracBodu);
+                    seznamPracovnichStitku.pridatDoSeznamu(docastnyStitek);
+                    createPracovniStitek(docastnyStitek);
+                }
             }
             
             SouborPracovniStitek.SPS().ulozeniPracovnihoStitku(seznamPracovnichStitku.vratSeznamOL());
