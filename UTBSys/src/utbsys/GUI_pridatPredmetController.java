@@ -93,19 +93,18 @@ public class GUI_pridatPredmetController implements Initializable {
                 chb_pocetTydnu.getValue() == 14 && chb_velikostTridy.getValue() == 24 ||
                 chb_pocetTydnu.getValue() == 14 && chb_velikostTridy.getValue() == 12){
                 if (seznamSkupinekPT.getOBSeznam().size() > 0){
+                    novyPredmet = new Predmet(tf_nazevPredmetu.getText(),
+                            tf_zkratkaPredmetu.getText(),
+                            s_pocetKreditu.getValue(),
+                            chb_pocetTydnu.getValue(),
+                            s_hodinyPrednasek.getValue(),
+                            s_hodinyCviceni.getValue(),
+                            s_hodinySeminaru.getValue(),
+                            chb_zakonceniPredmetu.getValue(),
+                            chb_jazykPredmetu.getValue(),
+                            chb_velikostTridy.getValue(),
+                            seznamSkupinekPT);
                     if (!seznamPredmetu.zjistiZdaExistuje(novyPredmet)){
-                        novyPredmet = new Predmet(tf_nazevPredmetu.getText(),
-                                tf_zkratkaPredmetu.getText(),
-                                s_pocetKreditu.getValue(),
-                                chb_pocetTydnu.getValue(),
-                                s_hodinyPrednasek.getValue(),
-                                s_hodinyCviceni.getValue(),
-                                s_hodinySeminaru.getValue(),
-                                chb_zakonceniPredmetu.getValue(),
-                                chb_jazykPredmetu.getValue(),
-                                chb_velikostTridy.getValue(),
-                                seznamSkupinekPT
-                        );
                         seznamPredmetu.pridatDoSeznamu(novyPredmet);
                         StagePridatPredmet.close();
                     }

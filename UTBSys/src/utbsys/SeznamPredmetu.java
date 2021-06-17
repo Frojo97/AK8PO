@@ -34,4 +34,13 @@ public class SeznamPredmetu {
         }
         return false; 
     }
+    
+    public void upravPredmet(Predmet pt, Predmet novyPredmet){
+        for (int i = 0; i < seznamPredmetu.size(); i++){
+            if (seznamPredmetu.get(i).getZkratkaPredmetu().equals(pt.getZkratkaPredmetu())){
+                seznamPredmetu.get(i).setVelikostTridy(novyPredmet.getVelikostTridy());
+                seznamPredmetu.get(i).setSeznamSkupin(novyPredmet.getSkupinkaOL());
+            }
+        }
+    }
 }

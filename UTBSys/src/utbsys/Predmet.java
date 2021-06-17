@@ -29,6 +29,14 @@ public class Predmet {
         this.seznamSkupin = SS.getOBSeznam();
     }
     
+    public void setVelikostTridy(int velikostTridy){
+        this.velikostTridy = velikostTridy;
+    }
+    
+    public void setSeznamSkupin(ObservableList<Skupinka> seznamSkupin){
+        this.seznamSkupin = seznamSkupin;
+    }
+    
     public String getNazevPredmetu(){
 	return this.nazevPredmetu;
     }

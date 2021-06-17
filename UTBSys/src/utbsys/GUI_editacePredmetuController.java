@@ -50,6 +50,8 @@ public class GUI_editacePredmetuController implements Initializable{
     private SeznamSkupinek seznamSkupinek;
     private ObservableList<Skupinka> seznamSkupinekPTOL = FXCollections.observableArrayList();
     private SeznamSkupinek seznamSkupinekPT = new SeznamSkupinek();
+    private Predmet hledPredmet;
+    private Predmet novyPredmet; 
     
     public GUI_editacePredmetuController(SeznamPredmetu seznamPredmetu, String zkratkaPredmetu, SeznamSkupinek seznamSkupinek){
         StageEditovatPredmet = new Stage();
@@ -80,6 +82,12 @@ public class GUI_editacePredmetuController implements Initializable{
                 pridaniSkupinek();
             }
         });
+        
+        btn_pridat.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                pridani();
+            }
+        });
     }
     
     public void showStage(){ //Pro zobrazení stage
@@ -87,7 +95,7 @@ public class GUI_editacePredmetuController implements Initializable{
     }
     
     private void nahodInfoOPt(String hledanyPredmet){
-        Predmet hledPredmet = seznamPredmetu.getPredmet(hledanyPredmet);
+        hledPredmet = seznamPredmetu.getPredmet(hledanyPredmet);
         tf_nazevPredmetu.setText(hledPredmet.getNazevPredmetu());
         tf_zkratkaPredmetu.setText(hledPredmet.getZkratkaPredmetu());
         s_pocetKreditu.getValueFactory().setValue(hledPredmet.getPocetKreditu());
@@ -145,10 +153,28 @@ public class GUI_editacePredmetuController implements Initializable{
         GUI_pridaniSkupinekDoPredmetuController gui_addSK = new GUI_pridaniSkupinekDoPredmetuController(docasnySeznam, seznamSkupinekPT);
         gui_addSK.showStage();
         seznamSkupinekPT = gui_addSK.vratSkupinky();
-        
     }
     
+    private void pridani(){
+        novyPredmet = new Predmet(tf_nazevPredmetu.getText(),
+                tf_zkratkaPredmetu.getText(),
+                s_pocetKreditu.getValue(),
+                chb_pocetTydnu.getValue(),
+                s_hodinyPrednasek.getValue(),
+                s_hodinyCviceni.getValue(),
+                s_hodinySeminaru.getValue(),
+                chb_zakonceniPredmetu.getValue(),
+                chb_jazykPredmetu.getValue(),
+                chb_velikostTridy.getValue(),
+                seznamSkupinekPT);
+        
+        seznamPredmetu.upravPredmet(hledPredmet, novyPredmet);
+        StageEditovatPredmet.close();
+    }
     
+    public SeznamPredmetu vratSeznamPredmetu(){
+        return seznamPredmetu;
+    }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -163,9 +189,9 @@ public class GUI_editacePredmetuController implements Initializable{
         
         chb_pocetTydnu.getItems().add(14);
         chb_pocetTydnu.getItems().add(1);
-        chb_pocetTydnu.setValue(14);
-        
+
         chb_velikostTridy.getItems().add(24);
         chb_velikostTridy.getItems().add(12);
+        chb_velikostTridy.getItems().add(0);
     }  
 }
