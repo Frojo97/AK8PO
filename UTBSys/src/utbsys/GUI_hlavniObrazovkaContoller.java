@@ -77,7 +77,7 @@ public class GUI_hlavniObrazovkaContoller {
             createStitekSkupinka(oblSkupinka.get(i));
         }
         
-        seznamPredmetu = SouborPredmet.SP().nacteniPredmetu();
+        seznamPredmetu = SouborPredmet.SP().nacteniPredmetu(seznamSkupinek);
         setDisableBTNPredmet();
         zobrazDataVListViewPredmet();
         
@@ -138,6 +138,7 @@ public class GUI_hlavniObrazovkaContoller {
         mi_oAplikaci.setOnAction(event -> otevriOAplikaciDialog());
         btn_pridatSkupinku.setOnAction(event -> otevriPridatSkupinku());
         btn_pridatPredmet.setOnAction(event -> otevriPridatPredmet());
+        btn_editovatPredmet.setOnAction(event -> editacePredmetu());
         btn_smazatPredmet.setOnAction(event -> smazaniPredmetu());
         btn_pridatZamestnance.setOnAction(event -> otevriPridatZamestnance());
         btn_editovatZamestnance.setOnAction(event -> editaceZamestnance());
@@ -245,7 +246,8 @@ public class GUI_hlavniObrazovkaContoller {
     }
     
     private void editacePredmetu(){
-        
+        GUI_editacePredmetuController gui_editace = new GUI_editacePredmetuController(seznamPredmetu, lv_predmet.getSelectionModel().getSelectedItem().getZkratkaPredmetu(), seznamSkupinek);
+        gui_editace.showStage();
     }
     
     private void smazaniPredmetu(){

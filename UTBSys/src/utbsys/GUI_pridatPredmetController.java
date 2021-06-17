@@ -48,6 +48,7 @@ public class GUI_pridatPredmetController implements Initializable {
     private Predmet novyPredmet;
     private SeznamPredmetu seznamPredmetu;
     private SeznamSkupinek seznamSkupinek;
+    private SeznamSkupinek seznamSkupinekPT = new SeznamSkupinek();
     
     public GUI_pridatPredmetController(SeznamPredmetu seznamPredmetu, SeznamSkupinek seznamSkupinek){//Inicializace okna a nastavení jeho prvků
         StagePridatPredmet = new Stage();
@@ -91,24 +92,30 @@ public class GUI_pridatPredmetController implements Initializable {
             if (chb_pocetTydnu.getValue() == 1 && chb_velikostTridy.getValue() == 0 ||
                 chb_pocetTydnu.getValue() == 14 && chb_velikostTridy.getValue() == 24 ||
                 chb_pocetTydnu.getValue() == 14 && chb_velikostTridy.getValue() == 12){
-                novyPredmet = new Predmet(tf_nazevPredmetu.getText(),
-                    tf_zkratkaPredmetu.getText(),
-                    s_pocetKreditu.getValue(),
-                    chb_pocetTydnu.getValue(),
-                    s_hodinyPrednasek.getValue(),
-                    s_hodinyCviceni.getValue(),
-                    s_hodinySeminaru.getValue(),
-                    chb_zakonceniPredmetu.getValue(),
-                    chb_jazykPredmetu.getValue(),
-                    chb_velikostTridy.getValue()         
-                );
-                if (!seznamPredmetu.zjistiZdaExistuje(novyPredmet)){
-                    seznamPredmetu.pridatDoSeznamu(novyPredmet);
-                    StagePridatPredmet.close();
+                if (seznamSkupinekPT.getOBSeznam().size() > 0){
+                    if (!seznamPredmetu.zjistiZdaExistuje(novyPredmet)){
+                        novyPredmet = new Predmet(tf_nazevPredmetu.getText(),
+                                tf_zkratkaPredmetu.getText(),
+                                s_pocetKreditu.getValue(),
+                                chb_pocetTydnu.getValue(),
+                                s_hodinyPrednasek.getValue(),
+                                s_hodinyCviceni.getValue(),
+                                s_hodinySeminaru.getValue(),
+                                chb_zakonceniPredmetu.getValue(),
+                                chb_jazykPredmetu.getValue(),
+                                chb_velikostTridy.getValue(),
+                                seznamSkupinekPT
+                        );
+                        seznamPredmetu.pridatDoSeznamu(novyPredmet);
+                        StagePridatPredmet.close();
+                    }
+                    else {
+                        AlertOkno alert = new AlertOkno('E', "Chyba", "Daný předmět se zkratkou už existuje!");
+                    }
                 }
                 else {
-                    AlertOkno alert = new AlertOkno('E', "Chyba", "Daný předmět se zkratkou už existuje!");
-                }
+                        AlertOkno alert = new AlertOkno('E', "Chyba", "K danému předmětu nebyla přidělena alespoň jedna skupinka!");
+                }   
             }
             else {
                 AlertOkno alert = new AlertOkno('E', "Chyba", "Nesprávná kombinace počet tydnů a velikosti třídy!\nPro kombi studium je počet týdnů = 1 a velikost třídy = 0\nPro prezenční studium je počet týdnů = 14 a velikost třídy = 24 nebo 12");
@@ -157,8 +164,9 @@ public class GUI_pridatPredmetController implements Initializable {
                 }
             }
             if (sk.size() > 0) {
-                GUI_pridaniSkupinekDoPredmetuController gui_addSK = new GUI_pridaniSkupinekDoPredmetuController(docasnySeznam);
+                GUI_pridaniSkupinekDoPredmetuController gui_addSK = new GUI_pridaniSkupinekDoPredmetuController(docasnySeznam, null);
                 gui_addSK.showStage();
+                seznamSkupinekPT = gui_addSK.vratSkupinky();
             }
             else{
                 AlertOkno alert = new AlertOkno('E', "Chyba", "Neexistuje, žádná skupina!");

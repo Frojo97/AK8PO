@@ -15,7 +15,7 @@ public class Predmet {
     private int velikostTridy;
     private ObservableList<Skupinka> seznamSkupin;
     
-    public Predmet(String nazevPredmetu, String zkratkaPredmetu, int pocetKreditu, int pocetTydnu, int hodinPrednasek, int hodinCviceni, int hodinSeminaru, EnumZakonceni zakonceni, EnumJazyk jazyk, int velikostTridy){
+    public Predmet(String nazevPredmetu, String zkratkaPredmetu, int pocetKreditu, int pocetTydnu, int hodinPrednasek, int hodinCviceni, int hodinSeminaru, EnumZakonceni zakonceni, EnumJazyk jazyk, int velikostTridy, SeznamSkupinek SS){
         this.nazevPredmetu = nazevPredmetu;
         this.zkratkaPredmetu = zkratkaPredmetu;
         this.pocetKreditu = pocetKreditu;
@@ -26,6 +26,7 @@ public class Predmet {
         this.zakonceni = zakonceni;
         this.jazyk = jazyk;
         this.velikostTridy = velikostTridy;
+        this.seznamSkupin = SS.getOBSeznam();
     }
     
     public String getNazevPredmetu(){
@@ -66,6 +67,10 @@ public class Predmet {
     
     public int getVelikostTridy(){
 	return this.velikostTridy;
+    }
+    
+    public ObservableList<Skupinka> getSkupinkaOL(){
+        return this.seznamSkupin;
     }
     
     @Override
