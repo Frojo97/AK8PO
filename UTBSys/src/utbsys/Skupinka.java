@@ -58,4 +58,15 @@ public class Skupinka {
     public String getJazyk(){
         return this.jazyk.toString();
     }
+    
+    public void setPocetStudentu(int pocet){
+        this.pocetStudentu = pocet;
+    }
+    
+    @Override
+    public String toString(){
+        return this.zkratkaSkupinky + " - " + this.nazevSkupinky + " - " + this.jazyk + "\n" +
+                "Ročník: " + this.rocnik + "    Semestr: " + this.semestr + "    Forma studia: " + this.formaStudia + "    Typ Studia: " + this.typStudia + "\n" +
+                "Počet studentů: " + this.pocetStudentu;
+    }
 }

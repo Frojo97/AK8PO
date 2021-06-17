@@ -29,9 +29,9 @@
       <Spinner fx:id="s_hodinySeminaru" layoutX="210.0" layoutY="282.0" />
       <ChoiceBox fx:id="chb_zakonceniPredmetu" layoutX="210.0" layoutY="325.0" prefWidth="150.0" />
       <ChoiceBox fx:id="chb_jazykPredmetu" layoutX="210.0" layoutY="368.0" prefWidth="150.0" />
-      <ChoiceBox layoutX="210.0" layoutY="453.0" prefWidth="150.0" />
       <Button fx:id="btn_pridat" layoutX="336.0" layoutY="498.0" mnemonicParsing="false" text="Přidat" />
       <ChoiceBox fx:id="chb_velikostTridy" layoutX="210.0" layoutY="411.0" prefWidth="150.0" />
+      <Button fx:id="btn_pridatSkupinku" layoutX="210.0" layoutY="454.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Přidat skupinku" />
       
    </children>
 </AnchorPane>

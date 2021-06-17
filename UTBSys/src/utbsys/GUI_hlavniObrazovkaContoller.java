@@ -171,13 +171,21 @@ public class GUI_hlavniObrazovkaContoller {
         //Prida stitek do GridPaneOkno
         GUI_stitekSkupinkaController gui_stitekSC = new GUI_stitekSkupinkaController(newSk);
         //Nastaveni eventů pro buttony
-        gui_stitekSC.mi_editovatSS.setOnAction(event -> editaceStitekSkupinka());
+        gui_stitekSC.mi_editovatSS.setOnAction(event -> editaceStitekSkupinka(gui_stitekSC.getID()));
         gui_stitekSC.mi_odstranitSS.setOnAction(event -> odstranStitekSkupinka(gui_stitekSC.getID()));
         gpo_skupinka.addStitek(gui_stitekSC);
     }
     
-    private void editaceStitekSkupinka(){
-        
+    private void editaceStitekSkupinka(int ID){
+        GUI_editaceSkupinkaController gui_editSK = new GUI_editaceSkupinkaController(seznamSkupinek, ID);
+        gui_editSK.showStage();
+        seznamSkupinek = gui_editSK.vratSeznamSkupinek();
+        gpo_skupinka.refactorGridPane();
+        ObservableList<Skupinka> sk = seznamSkupinek.getOBSeznam();
+        for (int i = 0; i < sk.size(); i++){
+            createStitekSkupinka(sk.get(i));
+        }
+        SouborSkupinka.SK().ulozeniSkupinky(seznamSkupinek.getOBSeznam());
     }
     
     private void odstranStitekSkupinka(int ID){
@@ -193,7 +201,7 @@ public class GUI_hlavniObrazovkaContoller {
     
     //Předmět
     private void otevriPridatPredmet(){
-        GUI_pridatPredmetController guiPridatPredmet = new GUI_pridatPredmetController(seznamPredmetu);
+        GUI_pridatPredmetController guiPridatPredmet = new GUI_pridatPredmetController(seznamPredmetu, seznamSkupinek);
         guiPridatPredmet.showStage();
         
         if (guiPridatPredmet.vratPredmet() != null){

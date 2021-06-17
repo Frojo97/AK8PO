@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -41,13 +42,17 @@ public class GUI_pridatPredmetController implements Initializable {
     @FXML
     private ChoiceBox<Integer> chb_velikostTridy;
     @FXML
+    private Button btn_pridatSkupinku;
+    @FXML
     private Button btn_pridat;
     private Predmet novyPredmet;
     private SeznamPredmetu seznamPredmetu;
+    private SeznamSkupinek seznamSkupinek;
     
-    public GUI_pridatPredmetController(SeznamPredmetu seznamPredmetu){//Inicializace okna a nastavení jeho prvků
+    public GUI_pridatPredmetController(SeznamPredmetu seznamPredmetu, SeznamSkupinek seznamSkupinek){//Inicializace okna a nastavení jeho prvků
         StagePridatPredmet = new Stage();
         this.seznamPredmetu = seznamPredmetu;
+        this.seznamSkupinek = seznamSkupinek;
         
         try {
             FXMLLoader pridatPredmetController = new FXMLLoader(getClass().getResource("GUI_pridatPredmet.fxml"));
@@ -67,6 +72,12 @@ public class GUI_pridatPredmetController implements Initializable {
         btn_pridat.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 pridatPredmet();
+            }
+        });
+        
+        btn_pridatSkupinku.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                pridaniSkupinek();
             }
         });
     }
@@ -126,6 +137,38 @@ public class GUI_pridatPredmetController implements Initializable {
             return false;
     }  
 
+    private void pridaniSkupinek(){
+        EnumFormaStudia studium; 
+        if (chb_pocetTydnu.getValue() == 1 && chb_velikostTridy.getValue() == 0 ){
+            studium = EnumFormaStudia.K;
+        }  
+        else if (chb_pocetTydnu.getValue() == 14 && chb_velikostTridy.getValue() == 24 || chb_pocetTydnu.getValue() == 14 && chb_velikostTridy.getValue() == 12){
+            studium = EnumFormaStudia.P;
+        }   
+        else 
+            studium = null;
+        
+        if (studium != null){
+            ObservableList<Skupinka> sk = seznamSkupinek.getOBSeznam();
+            SeznamSkupinek docasnySeznam = new SeznamSkupinek();
+            for (int i = 0; i < sk.size(); i++){
+                if (sk.get(i).getFormaStudia().equals(studium.toString())){
+                    docasnySeznam.pridatDoSeznamu(sk.get(i));
+                }
+            }
+            if (sk.size() > 0) {
+                GUI_pridaniSkupinekDoPredmetuController gui_addSK = new GUI_pridaniSkupinekDoPredmetuController(docasnySeznam);
+                gui_addSK.showStage();
+            }
+            else{
+                AlertOkno alert = new AlertOkno('E', "Chyba", "Neexistuje, žádná skupina!");
+            }
+        }
+        else {
+            AlertOkno alert = new AlertOkno('E', "Chyba", "Nebyla zadáná správna kombinace pro zobrazení skupinek!");
+        }
+    }
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SpinnerValueFactory<Integer> svf = new SpinnerValueFactory.IntegerSpinnerValueFactory(0,10,0);

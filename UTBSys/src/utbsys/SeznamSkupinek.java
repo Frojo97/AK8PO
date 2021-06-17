@@ -33,4 +33,12 @@ public class SeznamSkupinek {
     public ObservableList<Skupinka> getOBSeznam(){
         return seznamSkupinky;
     }
+    
+    public void zmenaPoctu(int ID, int novyPocet){
+        for (int i = 0; i < seznamSkupinky.size(); i++){
+            if (seznamSkupinky.get(i).getID() == ID){
+                seznamSkupinky.get(i).setPocetStudentu(novyPocet);
+            }
+        }
+    }
 }
