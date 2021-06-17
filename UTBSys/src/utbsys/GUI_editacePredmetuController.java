@@ -48,7 +48,7 @@ public class GUI_editacePredmetuController implements Initializable{
     private SeznamPredmetu seznamPredmetu;
     private String upravovanyPredmet;
     private SeznamSkupinek seznamSkupinek;
-    private ObservableList<Skupinka> seznamSkupinekPTOL = FXCollections.observableArrayList();
+    private ObservableList<Skupinka> seznamSkupinekPTOL;
     private SeznamSkupinek seznamSkupinekPT = new SeznamSkupinek();
     private Predmet hledPredmet;
     private Predmet novyPredmet; 
@@ -123,7 +123,7 @@ public class GUI_editacePredmetuController implements Initializable{
         prevodSeznamu();
     }
     
-    private void prevodSeznamu(){
+    private void prevodSeznamu(){ //Převede seznam z ObservableListu do objektu SeznamSkupinek
         for (int i = 0; i < seznamSkupinekPTOL.size(); i++)
             seznamSkupinekPT.pridatDoSeznamu(seznamSkupinekPTOL.get(i));
     }
@@ -143,10 +143,15 @@ public class GUI_editacePredmetuController implements Initializable{
         SeznamSkupinek docasnySeznam = new SeznamSkupinek();
         for (int i = 0; i < sk.size(); i++){
             if (sk.get(i).getFormaStudia().equals(studium.toString())){
-                for (int j = 0; j < seznamSkupinekPTOL.size(); j++){
-                    if (sk.get(i).getID() != seznamSkupinekPTOL.get(j).getID())
-                        docasnySeznam.pridatDoSeznamu(sk.get(i));
-                }   
+                docasnySeznam.pridatDoSeznamu(sk.get(i));
+            }
+        }
+        
+        for (int i = 0; i < docasnySeznam.getOBSeznam().size(); i++){
+            for (int j = 0; j < seznamSkupinekPTOL.size(); j++){
+                if (docasnySeznam.getOBSeznam().get(i).getID() == seznamSkupinekPTOL.get(j).getID()){
+                    docasnySeznam.odstranitZeSeznamu(seznamSkupinekPTOL.get(j).getID());
+                }
             }
         }
 
