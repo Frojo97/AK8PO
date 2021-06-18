@@ -10,6 +10,14 @@ public class SeznamPracovnichStitku {
         this.seznamPracovnichStitku.add(ps);
     }
     
+    public void odebratZeSeznamu(String nazevPredmetu){ //Přidá nové skupinky do seznamu
+        for (int i = 0; i < seznamPracovnichStitku.size(); i++){
+            if (seznamPracovnichStitku.get(i).getPredmetID().equals(nazevPredmetu))
+                this.seznamPracovnichStitku.remove(seznamPracovnichStitku.get(i));
+        }
+        
+    }
+    
     public void editacePracovnihoStitku(String nazevStitku, PracovniStitek upravenyPracStitek){
         for (int i = 0; i < seznamPracovnichStitku.size(); i++){
             if (seznamPracovnichStitku.get(i).getNazev().equals(upravenyPracStitek.getNazev())){

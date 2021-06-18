@@ -122,7 +122,7 @@ public class GUI_editacePredmetuController implements Initializable{
         seznamSkupinekPTOL = hledPredmet.getSkupinkaOL();
         prevodSeznamu();
         
-        if(hledPredmet.getVelikostTridy() == 24 || hledPredmet.getVelikostTridy() == 14)
+        if(hledPredmet.getVelikostTridy() != 0)
             chb_velikostTridy.getItems().remove(2);
     }
     
@@ -186,6 +186,10 @@ public class GUI_editacePredmetuController implements Initializable{
     
     public SeznamPredmetu vratSeznamPredmetu(){
         return seznamPredmetu;
+    }
+    
+    public Predmet vratPredmet(){
+        return novyPredmet;
     }
     
     @Override
