@@ -347,6 +347,9 @@ public class GUI_hlavniObrazovkaContoller {
         SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
         zobrazDataVListViewZamestnanec();
         
+        
+        //createPracovniStitek(new PracovniStitek(docasny.getNazev(), docasny.getZamestnanecID(), docasny.getPredmetID(), docasny.getTypStitku(), docasny.getPocetStudentu(), docasny.getPocetHodin(), ));
+        
     }
     
     private void odebratZamStitekPrac(String stitekID){
