@@ -508,11 +508,24 @@ public class GUI_hlavniObrazovkaContoller {
     }
     
     private void smazaniPredmetu(){
+        String zkratkaPredmetu = lv_predmet.getSelectionModel().getSelectedItem().getZkratkaPredmetu();
         seznamPredmetu.odstranitZeSeznamu(lv_predmet.getSelectionModel().getSelectedItem().getZkratkaPredmetu());
         zobrazDataVListViewPredmet();
         lv_predmet.getSelectionModel().clearSelection();
         setDisableBTNPredmet();
         SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.vratSeznamOL());
+        ObservableList<PracovniStitek> pocetSt = seznamPracovnichStitku.vratSeznamOL();
+        int pocetPredmet = 0;
+        for(int i = 0; i < pocetSt.size(); i++){
+            if(pocetSt.get(i).getPredmetID().equals(zkratkaPredmetu));
+                pocetPredmet++;
+        }
+        for (int i = 0; i < pocetPredmet; i++){
+            seznamPracovnichStitku.odebratZeSeznamu(zkratkaPredmetu);
+        }
+        gpo_pracovniStitky.refactorGridPane();
+        
+        SouborPracovniStitek.SPS().ulozeniPracovnihoStitku(seznamPracovnichStitku.vratSeznamOL());  
     }
     
     //Zaměstnanec
