@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="vb_okno" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="128.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/16">
+<VBox fx:id="vb_okno" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="128.0" prefWidth="128.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <GridPane prefHeight="17.5" prefWidth="128.0">
         <columnConstraints>
@@ -33,7 +33,7 @@
             <Label fx:id="lbl_body" />
             <MenuButton mnemonicParsing="false" text="..." GridPane.columnIndex="1">
               <items>
-                <MenuItem fx:id="mi_editovatSS" mnemonicParsing="false" text="Editovat" />
+                <MenuItem fx:id="mi_pridatZamSS" mnemonicParsing="false" text="Přidat zaměstnance" />
                 <MenuItem fx:id="mi_odstranitSS" mnemonicParsing="false" text="Odstranit" />
               </items>
             </MenuButton>

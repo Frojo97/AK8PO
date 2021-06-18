@@ -25,6 +25,14 @@ public class SeznamPracovnichStitku {
         }
     }
     
+    public void pridaniZamDoPracovnihoStitku(String nazevStitku, Zamestnanec zamestnanec){
+        for (int i = 0; i < seznamPracovnichStitku.size(); i++){
+            if (seznamPracovnichStitku.get(i).getNazev().equals(nazevStitku)){
+                seznamPracovnichStitku.get(i).setZamestnanec(zamestnanec.getID()); 
+            }
+        }
+    }
+    
     public ObservableList<PracovniStitek> vratSeznamOL(){
         return seznamPracovnichStitku;
     }

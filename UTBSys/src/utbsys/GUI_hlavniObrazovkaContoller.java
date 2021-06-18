@@ -315,10 +315,22 @@ public class GUI_hlavniObrazovkaContoller {
     
     private void createPracovniStitek(PracovniStitek pracovniStitek){
         pracovniStitek.vypocetBodu(vahyPracBodu);
-        GUI_pracovniStitekController gui_pracovniStitek = new GUI_pracovniStitekController(pracovniStitek);
-       /* gui_stitekSC.mi_editovatSS.setOnAction(event -> editaceStitekSkupinka());
-        gui_stitekSC.mi_odstranitSS.setOnAction(event -> odstranStitekSkupinka(gui_stitekSC.getID()));*/
+        GUI_pracovniStitekController gui_pracovniStitek = new GUI_pracovniStitekController(pracovniStitek, seznamZamestnancu);
+        gui_pracovniStitek.mi_pridatZamSS.setOnAction(event -> pridatZamStitekPrac(gui_pracovniStitek.getID()));
+        /*gui_stitekSC.mi_odstranitSS.setOnAction(event -> odstranStitekSkupinka(gui_stitekSC.getID()));*/
         gpo_pracovniStitky.addStitek(gui_pracovniStitek);
+    }
+    
+    private void pridatZamStitekPrac(String stitekID){
+        GUI_pridatZamStitekController gui_pridatZam = new GUI_pridatZamStitekController(seznamZamestnancu, seznamPracovnichStitku, stitekID);
+        gui_pridatZam.showStage();
+        seznamPracovnichStitku = gui_pridatZam.vratSeznamPracovnichStitku();
+        gpo_pracovniStitky.refactorGridPane();
+        ObservableList<PracovniStitek> ps = seznamPracovnichStitku.vratSeznamOL();
+        for (int i = 0; i < ps.size(); i++){
+            createPracovniStitek(ps.get(i));
+        }
+        SouborPracovniStitek.SPS().ulozeniPracovnihoStitku(seznamPracovnichStitku.vratSeznamOL());
     }
     
     private void zobrazDataVListViewPredmet(){ //Zajištuje zobrazení dat v ListView 
