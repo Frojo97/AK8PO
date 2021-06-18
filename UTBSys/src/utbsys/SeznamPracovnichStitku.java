@@ -41,6 +41,23 @@ public class SeznamPracovnichStitku {
         }
     }
     
+    public int vratIDzamestnance(String nazevStitku){
+        for (int i = 0; i < seznamPracovnichStitku.size(); i++){
+            if (seznamPracovnichStitku.get(i).getNazev().equals(nazevStitku)){
+                return seznamPracovnichStitku.get(i).getZamestnanecID();
+            }
+        }
+        return 0;
+    }
+    
+    public void odebraniZamZeVsechPracovnihoStitku(int ID){
+        for (int i = 0; i < seznamPracovnichStitku.size(); i++){
+            if (seznamPracovnichStitku.get(i).getZamestnanecID() == ID){
+                seznamPracovnichStitku.get(i).setZamestnanec(0); 
+            }
+        }
+    }
+    
     public ObservableList<PracovniStitek> vratSeznamOL(){
         return seznamPracovnichStitku;
     }

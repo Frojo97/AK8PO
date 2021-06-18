@@ -70,6 +70,13 @@ public class GUI_pridatZamStitekController {
         return this.seznamStitku;
     }
     
+    public int vratIDzamestnance(){
+        if(!lv_zamestnanci.getSelectionModel().isEmpty())
+            return lv_zamestnanci.getSelectionModel().getSelectedItem().getID();
+        else
+            return 0;
+    }
+    
     private void zobrazDataLV(){
         lv_zamestnanci.setItems(seznamZamestnancu.vratSeznamOL());
         lv_zamestnanci.setCellFactory(param -> new ListCell<Zamestnanec>() {

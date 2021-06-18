@@ -185,7 +185,6 @@ public class SouborZamestnanec {
                             }
                         }
                     }
-                    
                     seznamZamestnancu.pridatDoSeznamu(new Zamestnanec( Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()),
                             element.getElementsByTagName("titulPred").item(0).getTextContent(), 
                             element.getElementsByTagName("jmeno").item(0).getTextContent(),
@@ -201,6 +200,7 @@ public class SouborZamestnanec {
                             prehodDoStitku(SPS, IDstitku)
                     ));
                 }
+                IDstitku.clear();
             }
             return seznamZamestnancu;
         }catch (SAXException | IOException |ParserConfigurationException ex){
@@ -214,7 +214,7 @@ public class SouborZamestnanec {
         SeznamPracovnichStitku vratSPS = new SeznamPracovnichStitku();
         for (int i = 0; i < IDstitku.size(); i++){
             for (int j = 0; j < SPS.vratSeznamOL().size(); j++){
-                if (IDstitku.get(i) == SPS.vratSeznamOL().get(j).getNazev())
+                if (IDstitku.get(i).equals(SPS.vratSeznamOL().get(j).getNazev()))
                     vratSPS.pridatDoSeznamu(SPS.getPracovniStitek(IDstitku.get(i)));
             }
         }

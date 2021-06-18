@@ -51,15 +51,27 @@ public class Zamestnanec {
         prepocitejBody();
     }
     
+    public void addPracovnichStitku(PracovniStitek prac){
+        this.seznamPracovnichStitku.add(prac);
+        prepocitejBody();
+    }
+    
+    public void deletePracovnichStitku(PracovniStitek prac){
+        this.seznamPracovnichStitku.remove(prac);
+        prepocitejBody();
+    }
+    
     private void prepocitejBody(){
-        if (!seznamPracovnichStitku.isEmpty()){
+        this.pracBodyAJ = 0;
+        this.pracBody = 0;
+        if (seznamPracovnichStitku.size() > 0){
             for (int i = 0; i < seznamPracovnichStitku.size(); i++){
                 if(seznamPracovnichStitku.get(i).getJazyk() == EnumJazyk.AJ)
-                    this.pracBodyAJ = seznamPracovnichStitku.get(i).getPocetBodu();
-                else
-                    this.pracBody = seznamPracovnichStitku.get(i).getPocetBodu();
-                
-                pracBodyAJ = pracBodyAJ + pracBody;
+                    this.pracBodyAJ = this.pracBodyAJ + seznamPracovnichStitku.get(i).getPocetBodu();
+                else{
+                    this.pracBody = this.pracBody + seznamPracovnichStitku.get(i).getPocetBodu();
+                    this.pracBodyAJ = this.pracBodyAJ + seznamPracovnichStitku.get(i).getPocetBodu();
+                }
             }
         }
     }

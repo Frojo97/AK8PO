@@ -320,12 +320,12 @@ public class GUI_hlavniObrazovkaContoller {
         pracovniStitek.vypocetBodu(vahyPracBodu);
         GUI_pracovniStitekController gui_pracovniStitek = new GUI_pracovniStitekController(pracovniStitek, seznamZamestnancu);
         if (pracovniStitek.getZamestnanecID() > 0){
-            gui_pracovniStitek.mi_pridatZamSS.setVisible(true);
-            gui_pracovniStitek.mi_odebratZamSS.setVisible(false);
+            gui_pracovniStitek.mi_pridatZamSS.setVisible(false);
+            gui_pracovniStitek.mi_odebratZamSS.setVisible(true);   
         }
         else {
-            gui_pracovniStitek.mi_pridatZamSS.setVisible(false);
-            gui_pracovniStitek.mi_odebratZamSS.setVisible(true);
+            gui_pracovniStitek.mi_pridatZamSS.setVisible(true);
+            gui_pracovniStitek.mi_odebratZamSS.setVisible(false);
         }
         gui_pracovniStitek.mi_pridatZamSS.setOnAction(event -> pridatZamStitekPrac(gui_pracovniStitek.getID()));
         gui_pracovniStitek.mi_odebratZamSS.setOnAction(event -> odebratZamStitekPrac(gui_pracovniStitek.getID()));
@@ -342,9 +342,15 @@ public class GUI_hlavniObrazovkaContoller {
             createPracovniStitek(ps.get(i));
         }
         SouborPracovniStitek.SPS().ulozeniPracovnihoStitku(seznamPracovnichStitku.vratSeznamOL());
+        PracovniStitek docasny = seznamPracovnichStitku.getPracovniStitek(stitekID);
+        seznamZamestnancu.editaceZamestnancePridatStitek(gui_pridatZam.vratIDzamestnance(), docasny);
+        SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
+        zobrazDataVListViewZamestnanec();
+        
     }
     
     private void odebratZamStitekPrac(String stitekID){
+        int IDzam = seznamPracovnichStitku.vratIDzamestnance(stitekID);
         seznamPracovnichStitku.odebratZamZPracovnihoStitku(stitekID);
         gpo_pracovniStitky.refactorGridPane();
         ObservableList<PracovniStitek> ps = seznamPracovnichStitku.vratSeznamOL();
@@ -352,6 +358,10 @@ public class GUI_hlavniObrazovkaContoller {
             createPracovniStitek(ps.get(i));
         }
         SouborPracovniStitek.SPS().ulozeniPracovnihoStitku(seznamPracovnichStitku.vratSeznamOL());
+        PracovniStitek docasny = seznamPracovnichStitku.getPracovniStitek(stitekID);
+        seznamZamestnancu.editaceZamestnanceOdebratStitek(IDzam, docasny);
+        SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
+        zobrazDataVListViewZamestnanec();
     }
     
     private void zobrazDataVListViewPredmet(){ //Zajištuje zobrazení dat v ListView 
@@ -420,10 +430,19 @@ public class GUI_hlavniObrazovkaContoller {
     }
     
     private void smazaniZamestnance(){
+        int ID = lv_zamestnanci.getSelectionModel().getSelectedItem().getID();
         seznamZamestnancu.odstranitZeSeznamu(lv_zamestnanci.getSelectionModel().getSelectedItem().getID());
         zobrazDataVListViewZamestnanec();
         lv_zamestnanci.getSelectionModel().clearSelection();
         setDisableBTNZamestnanec();
         SouborZamestnanec.SZ().ulozeniZamestnancu(seznamZamestnancu.vratSeznamOL());
+        seznamPracovnichStitku.odebraniZamZeVsechPracovnihoStitku(ID);
+        SouborPracovniStitek.SPS().ulozeniPracovnihoStitku(seznamPracovnichStitku.vratSeznamOL());
+        gpo_pracovniStitky.refactorGridPane();
+        ObservableList<PracovniStitek> sk = seznamPracovnichStitku.vratSeznamOL();
+        for (int i = 0; i < sk.size(); i++){
+            createPracovniStitek(sk.get(i));
+        }
+        SouborSkupinka.SK().ulozeniSkupinky(seznamSkupinek.getOBSeznam());
     }
 }

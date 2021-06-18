@@ -40,6 +40,22 @@ public class SeznamZamestnancu {
         }
     }
     
+    public void editaceZamestnancePridatStitek(int ID, PracovniStitek pracStitek){
+        for (int i = 0; i < seznamZamestnanec.size(); i++){
+            if (seznamZamestnanec.get(i).getID()==ID){
+                seznamZamestnanec.get(i).addPracovnichStitku(pracStitek);
+            }
+        }
+    }
+    
+    public void editaceZamestnanceOdebratStitek(int ID, PracovniStitek pracStitek){
+        for (int i = 0; i < seznamZamestnanec.size(); i++){
+            if (seznamZamestnanec.get(i).getID()==ID){
+                seznamZamestnanec.get(i).deletePracovnichStitku(pracStitek);
+            }
+        }
+    }
+    
     public Zamestnanec getZamestnanec(int ID){ //Vrati danou skupinku pomoci ID
         for (int i = 0; i < seznamZamestnanec.size(); i++){
             if (seznamZamestnanec.get(i).getID() == ID)
