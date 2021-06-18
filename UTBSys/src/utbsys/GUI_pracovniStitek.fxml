@@ -34,7 +34,7 @@
             <MenuButton mnemonicParsing="false" text="..." GridPane.columnIndex="1">
               <items>
                 <MenuItem fx:id="mi_pridatZamSS" mnemonicParsing="false" text="Přidat zaměstnance" />
-                <MenuItem fx:id="mi_odstranitSS" mnemonicParsing="false" text="Odstranit" />
+                <MenuItem fx:id="mi_odebratZamSS" mnemonicParsing="false" text="Odebrat zaměstnance" />
               </items>
             </MenuButton>
          </children>

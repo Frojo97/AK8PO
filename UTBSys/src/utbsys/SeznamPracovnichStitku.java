@@ -33,6 +33,14 @@ public class SeznamPracovnichStitku {
         }
     }
     
+    public void odebratZamZPracovnihoStitku(String nazevStitku){
+        for (int i = 0; i < seznamPracovnichStitku.size(); i++){
+            if (seznamPracovnichStitku.get(i).getNazev().equals(nazevStitku)){
+                seznamPracovnichStitku.get(i).setZamestnanec(0); 
+            }
+        }
+    }
+    
     public ObservableList<PracovniStitek> vratSeznamOL(){
         return seznamPracovnichStitku;
     }

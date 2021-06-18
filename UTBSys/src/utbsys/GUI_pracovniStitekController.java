@@ -30,7 +30,7 @@ public class GUI_pracovniStitekController{
     @FXML
     public MenuItem mi_pridatZamSS;
     @FXML
-    public MenuItem mi_odstranitSS;
+    public MenuItem mi_odebratZamSS;
     private Zamestnanec zamStit;    
     private VBox vb_stitekOkno;
     

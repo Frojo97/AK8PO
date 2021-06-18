@@ -316,8 +316,16 @@ public class GUI_hlavniObrazovkaContoller {
     private void createPracovniStitek(PracovniStitek pracovniStitek){
         pracovniStitek.vypocetBodu(vahyPracBodu);
         GUI_pracovniStitekController gui_pracovniStitek = new GUI_pracovniStitekController(pracovniStitek, seznamZamestnancu);
+        if (pracovniStitek.getZamestnanecID() > 0){
+            gui_pracovniStitek.mi_pridatZamSS.setVisible(false);
+            gui_pracovniStitek.mi_odebratZamSS.setVisible(true);   
+        }
+        else {
+            gui_pracovniStitek.mi_pridatZamSS.setVisible(true);
+            gui_pracovniStitek.mi_odebratZamSS.setVisible(false);
+        }
         gui_pracovniStitek.mi_pridatZamSS.setOnAction(event -> pridatZamStitekPrac(gui_pracovniStitek.getID()));
-        /*gui_stitekSC.mi_odstranitSS.setOnAction(event -> odstranStitekSkupinka(gui_stitekSC.getID()));*/
+        gui_pracovniStitek.mi_odebratZamSS.setOnAction(event -> odebratZamStitekPrac(gui_pracovniStitek.getID()));
         gpo_pracovniStitky.addStitek(gui_pracovniStitek);
     }
     
@@ -325,6 +333,16 @@ public class GUI_hlavniObrazovkaContoller {
         GUI_pridatZamStitekController gui_pridatZam = new GUI_pridatZamStitekController(seznamZamestnancu, seznamPracovnichStitku, stitekID);
         gui_pridatZam.showStage();
         seznamPracovnichStitku = gui_pridatZam.vratSeznamPracovnichStitku();
+        gpo_pracovniStitky.refactorGridPane();
+        ObservableList<PracovniStitek> ps = seznamPracovnichStitku.vratSeznamOL();
+        for (int i = 0; i < ps.size(); i++){
+            createPracovniStitek(ps.get(i));
+        }
+        SouborPracovniStitek.SPS().ulozeniPracovnihoStitku(seznamPracovnichStitku.vratSeznamOL());
+    }
+    
+    private void odebratZamStitekPrac(String stitekID){
+        seznamPracovnichStitku.odebratZamZPracovnihoStitku(stitekID);
         gpo_pracovniStitky.refactorGridPane();
         ObservableList<PracovniStitek> ps = seznamPracovnichStitku.vratSeznamOL();
         for (int i = 0; i < ps.size(); i++){
