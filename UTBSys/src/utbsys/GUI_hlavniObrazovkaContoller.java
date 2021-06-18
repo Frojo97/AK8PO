@@ -385,6 +385,8 @@ public class GUI_hlavniObrazovkaContoller {
         seznamPredmetu = gui_editace.vratSeznamPredmetu();
         zobrazDataVListViewPredmet();
         SouborPredmet.SP().ulozeniPredmetu(seznamPredmetu.vratSeznamOL());
+        
+        
     }
     
     private void smazaniPredmetu(){

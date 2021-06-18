@@ -121,6 +121,9 @@ public class GUI_editacePredmetuController implements Initializable{
         
         seznamSkupinekPTOL = hledPredmet.getSkupinkaOL();
         prevodSeznamu();
+        
+        if(hledPredmet.getVelikostTridy() == 24 || hledPredmet.getVelikostTridy() == 14)
+            chb_velikostTridy.getItems().remove(2);
     }
     
     private void prevodSeznamu(){ //Převede seznam z ObservableListu do objektu SeznamSkupinek
@@ -139,25 +142,29 @@ public class GUI_editacePredmetuController implements Initializable{
         else
             studium = null;
         
-        ObservableList<Skupinka> sk = seznamSkupinek.getOBSeznam();
-        SeznamSkupinek docasnySeznam = new SeznamSkupinek();
-        for (int i = 0; i < sk.size(); i++){
-            if (sk.get(i).getFormaStudia().equals(studium.toString())){
-                docasnySeznam.pridatDoSeznamu(sk.get(i));
-            }
-        }
-        
-        for (int i = 0; i < docasnySeznam.getOBSeznam().size(); i++){
-            for (int j = 0; j < seznamSkupinekPTOL.size(); j++){
-                if (docasnySeznam.getOBSeznam().get(i).getID() == seznamSkupinekPTOL.get(j).getID()){
-                    docasnySeznam.odstranitZeSeznamu(seznamSkupinekPTOL.get(j).getID());
+        if (studium != null){
+            ObservableList<Skupinka> sk = seznamSkupinek.getOBSeznam();
+            SeznamSkupinek docasnySeznam = new SeznamSkupinek();
+            for (int i = 0; i < sk.size(); i++){
+                if (sk.get(i).getFormaStudia().equals(studium.toString())){
+                    docasnySeznam.pridatDoSeznamu(sk.get(i));
                 }
             }
+        
+            for (int i = 0; i < docasnySeznam.getOBSeznam().size(); i++){
+                for (int j = 0; j < seznamSkupinekPTOL.size(); j++){
+                    if (docasnySeznam.getOBSeznam().get(i).getID() == seznamSkupinekPTOL.get(j).getID()){
+                        docasnySeznam.odstranitZeSeznamu(seznamSkupinekPTOL.get(j).getID());
+                    }
+                }
+            }
+            GUI_pridaniSkupinekDoPredmetuController gui_addSK = new GUI_pridaniSkupinekDoPredmetuController(docasnySeznam, seznamSkupinekPT);
+            gui_addSK.showStage();
+            seznamSkupinekPT = gui_addSK.vratSkupinky();
         }
-
-        GUI_pridaniSkupinekDoPredmetuController gui_addSK = new GUI_pridaniSkupinekDoPredmetuController(docasnySeznam, seznamSkupinekPT);
-        gui_addSK.showStage();
-        seznamSkupinekPT = gui_addSK.vratSkupinky();
+        else {
+            AlertOkno alert = new AlertOkno('E', "Chyba", "Nebyla zadáná správna kombinace pro zobrazení skupinek!");
+        }
     }
     
     private void pridani(){
