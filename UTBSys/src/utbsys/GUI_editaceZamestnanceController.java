@@ -40,6 +40,8 @@ public class GUI_editaceZamestnanceController {
     @FXML
     private Button btn_pridat;
     private int IDupravenehoZM;
+    private SeznamPracovnichStitku seznamPracovnichStitku = new SeznamPracovnichStitku();
+    private Zamestnanec hledanyZamestnanec;
     private Zamestnanec upravenyZamestnanec;
     private SeznamZamestnancu seznamZamestnancu;
     
@@ -70,7 +72,7 @@ public class GUI_editaceZamestnanceController {
     }
     
     private void nahodInfoOZamestnanci(int IDzamestnanec){ //Nahodi info o zaměstnanci do Lablů,...
-        Zamestnanec hledanyZamestnanec = this.seznamZamestnancu.getZamestnanec(IDzamestnanec);
+        hledanyZamestnanec = this.seznamZamestnancu.getZamestnanec(IDzamestnanec);
         tf_titulPred.setText(hledanyZamestnanec.getTitulPred());
         tf_jmeno.setText(hledanyZamestnanec.getJmeno());
         tf_prijmeni.setText(hledanyZamestnanec.getPrijmeni());
@@ -82,6 +84,12 @@ public class GUI_editaceZamestnanceController {
         tf_kancelar.setText(hledanyZamestnanec.getKancelar());
         cheb_doktorand.setSelected(hledanyZamestnanec.getDoktorand());
         chob_uvazek.setValue(hledanyZamestnanec.getUvazek());
+        prevodSeznamu();
+    }
+    
+    private void prevodSeznamu(){ //Převede seznam z ObservableListu do objektu SeznamSkupinek
+        for (int i = 0; i < hledanyZamestnanec.getPracovnichStitky().size(); i++)
+            seznamPracovnichStitku.pridatDoSeznamu(hledanyZamestnanec.getPracovnichStitky().get(i));
     }
     
     @FXML
@@ -104,7 +112,8 @@ public class GUI_editaceZamestnanceController {
                             tf_soukEmail.getText(),
                             tf_kancelar.getText(),
                             cheb_doktorand.isSelected(),
-                            chob_uvazek.getValue()
+                            chob_uvazek.getValue(),
+                            seznamPracovnichStitku
                     );
                     seznamZamestnancu.editaceZamestnance(IDupravenehoZM, upravenyZamestnanec);
                     StageEditovatZamestnance.close();

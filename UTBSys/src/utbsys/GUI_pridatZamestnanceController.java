@@ -41,6 +41,7 @@ public class GUI_pridatZamestnanceController {
     private Button btn_pridat;
     private Zamestnanec novyZamestnanec;
     private SeznamZamestnancu seznamZamestnancu;
+    private SeznamPracovnichStitku seznamPracovnichStitkuDoc = new SeznamPracovnichStitku();
      
     public GUI_pridatZamestnanceController(SeznamZamestnancu seznamZamestnancu){
         StagePridatZamestnance = new Stage();

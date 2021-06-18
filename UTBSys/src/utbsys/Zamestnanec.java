@@ -1,5 +1,8 @@
 package utbsys;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 public class Zamestnanec {
     private final int ID;
     private String titulPred;
@@ -15,10 +18,18 @@ public class Zamestnanec {
     private EnumUvazek uvazek;
     private double pracBody;
     private double pracBodyAJ;
+    private ObservableList<PracovniStitek> seznamPracovnichStitku = FXCollections.observableArrayList();
     
     public Zamestnanec(int ID, String titulPred, String jmeno, String prijmeni, String titulZa, String pracTel, String soukTel, String pracEmail, String soukEmail, String kancelar, boolean doktorand, EnumUvazek uvazek){
         this.ID = ID;
         setZamestnanec(titulPred, jmeno, prijmeni, titulZa, pracTel, soukTel, pracEmail, soukEmail, kancelar, doktorand, uvazek);
+    }
+    
+    public Zamestnanec(int ID, String titulPred, String jmeno, String prijmeni, String titulZa, String pracTel, String soukTel, String pracEmail, String soukEmail, String kancelar, boolean doktorand, EnumUvazek uvazek, SeznamPracovnichStitku SPS){
+        this.ID = ID;
+        setZamestnanec(titulPred, jmeno, prijmeni, titulZa, pracTel, soukTel, pracEmail, soukEmail, kancelar, doktorand, uvazek);
+        this.seznamPracovnichStitku = SPS.vratSeznamOL();
+        prepocitejBody();
     }
     
     public void setZamestnanec(String titulPred, String jmeno, String prijmeni, String titulZa, String pracTel, String soukTel, String pracEmail, String soukEmail, String kancelar, boolean doktorand, EnumUvazek uvazek){
@@ -33,6 +44,24 @@ public class Zamestnanec {
         this.kancelar = kancelar;
         this.doktorand = doktorand;
         this.uvazek = uvazek;
+    }
+    
+    public void setSeznamPracovnichStitku(ObservableList<PracovniStitek> seznamPracovnichStitku){
+        this.seznamPracovnichStitku = seznamPracovnichStitku;
+        prepocitejBody();
+    }
+    
+    private void prepocitejBody(){
+        if (!seznamPracovnichStitku.isEmpty()){
+            for (int i = 0; i < seznamPracovnichStitku.size(); i++){
+                if(seznamPracovnichStitku.get(i).getJazyk() == EnumJazyk.AJ)
+                    this.pracBodyAJ = seznamPracovnichStitku.get(i).getPocetBodu();
+                else
+                    this.pracBody = seznamPracovnichStitku.get(i).getPocetBodu();
+                
+                pracBodyAJ = pracBodyAJ + pracBody;
+            }
+        }
     }
     
     public int getID(){
@@ -83,6 +112,10 @@ public class Zamestnanec {
         return this.uvazek;
     }
     
+    public ObservableList<PracovniStitek> getPracovnichStitky(){
+        return this.seznamPracovnichStitku;
+    }
+    
     @Override
     public String toString(){
         return (this.titulPred.isEmpty() ? "" : (this.titulPred + " " )) +
@@ -97,6 +130,7 @@ public class Zamestnanec {
                 this.kancelar + "     Doktorand: " +
                 (this.doktorand ? "Ano" : "Ne") + 
                 "     Úvazek: " + 
-                this.uvazek + "";
+                this.uvazek + "" +
+                "\nPracovni body: " + this.pracBody + "    Pracovni body s AJ: " + this.pracBodyAJ;
     }
 }

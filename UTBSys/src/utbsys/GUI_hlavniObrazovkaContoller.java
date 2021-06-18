@@ -81,7 +81,7 @@ public class GUI_hlavniObrazovkaContoller {
         setDisableBTNPredmet();
         zobrazDataVListViewPredmet();
         
-        seznamZamestnancu = SouborZamestnanec.SZ().nacteniZamestnancu();
+        seznamZamestnancu = SouborZamestnanec.SZ().nacteniZamestnancuDocasne();
         setDisableBTNZamestnanec();
         zobrazDataVListViewZamestnanec();
         
@@ -92,6 +92,9 @@ public class GUI_hlavniObrazovkaContoller {
         for (int i = 0; i < oblPracovni.size(); i++){
             createPracovniStitek(oblPracovni.get(i));
         }
+        
+        seznamZamestnancu = SouborZamestnanec.SZ().nacteniZamestnancu(seznamPracovnichStitku);
+        zobrazDataVListViewZamestnanec();
 
         lv_predmet.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Predmet>() {
             public void changed(ObservableValue<? extends Predmet> observable, Predmet oldValue, Predmet newValue) {
@@ -317,12 +320,12 @@ public class GUI_hlavniObrazovkaContoller {
         pracovniStitek.vypocetBodu(vahyPracBodu);
         GUI_pracovniStitekController gui_pracovniStitek = new GUI_pracovniStitekController(pracovniStitek, seznamZamestnancu);
         if (pracovniStitek.getZamestnanecID() > 0){
-            gui_pracovniStitek.mi_pridatZamSS.setVisible(false);
-            gui_pracovniStitek.mi_odebratZamSS.setVisible(true);   
-        }
-        else {
             gui_pracovniStitek.mi_pridatZamSS.setVisible(true);
             gui_pracovniStitek.mi_odebratZamSS.setVisible(false);
+        }
+        else {
+            gui_pracovniStitek.mi_pridatZamSS.setVisible(false);
+            gui_pracovniStitek.mi_odebratZamSS.setVisible(true);
         }
         gui_pracovniStitek.mi_pridatZamSS.setOnAction(event -> pridatZamStitekPrac(gui_pracovniStitek.getID()));
         gui_pracovniStitek.mi_odebratZamSS.setOnAction(event -> odebratZamStitekPrac(gui_pracovniStitek.getID()));

@@ -44,4 +44,12 @@ public class SeznamPracovnichStitku {
     public ObservableList<PracovniStitek> vratSeznamOL(){
         return seznamPracovnichStitku;
     }
+    
+    public PracovniStitek getPracovniStitek(String nazev){ //Vrati danou skupinku pomoci ID
+        for (int i = 0; i < seznamPracovnichStitku.size(); i++){
+            if (seznamPracovnichStitku.get(i).getNazev().equals(nazev))
+                return seznamPracovnichStitku.get(i); 
+        }
+        return null;
+    }
 }

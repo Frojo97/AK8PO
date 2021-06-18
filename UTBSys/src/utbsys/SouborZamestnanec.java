@@ -2,6 +2,7 @@ package utbsys;
 
 import java.io.File;
 import java.io.IOException;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -94,6 +95,17 @@ public class SouborZamestnanec {
                 Element e_uvazek = document.createElement("uvazek");
                 e_uvazek.appendChild(document.createTextNode(seznamZamestnancu.get(i).getUvazek().toString()));
                 e_zamestnanec.appendChild(e_uvazek);
+                
+                ObservableList<PracovniStitek> pracStit = seznamZamestnancu.get(i).getPracovnichStitky();
+                for(int j = 0; j < pracStit.size(); j++){
+                    Element e_pracovniStitky = document.createElement("pracovniStitky");
+                    e_zamestnanec.appendChild(e_pracovniStitky);    
+                    
+                    Element e_pracovniStitek = document.createElement("pracovniStitek");
+                    e_pracovniStitek.appendChild(document.createTextNode(pracStit.get(j).getNazev()));
+                    e_pracovniStitky.appendChild(e_pracovniStitek);                
+                }  
+                
             }
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -109,7 +121,7 @@ public class SouborZamestnanec {
         }
     }
  
-    public SeznamZamestnancu nacteniZamestnancu(){
+    public SeznamZamestnancu nacteniZamestnancuDocasne(){
         SeznamZamestnancu seznamZamestnancu = new SeznamZamestnancu();
         try{
             DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
@@ -135,7 +147,7 @@ public class SouborZamestnanec {
                             element.getElementsByTagName("soukEmail").item(0).getTextContent(),
                             element.getElementsByTagName("kancelar").item(0).getTextContent(),
                             Boolean.parseBoolean(element.getElementsByTagName("doktorand").item(0).getTextContent()),
-                            EnumUvazek.valueOf(element.getElementsByTagName("uvazek").item(0).getTextContent())   
+                            EnumUvazek.valueOf(element.getElementsByTagName("uvazek").item(0).getTextContent())
                     ));
                 }
             }
@@ -144,5 +156,68 @@ public class SouborZamestnanec {
            ex.printStackTrace(); 
         }
         return null;   
+    }
+    
+     public SeznamZamestnancu nacteniZamestnancu(SeznamPracovnichStitku seznamPracovnichStitku){
+        SeznamZamestnancu seznamZamestnancu = new SeznamZamestnancu();
+        SeznamPracovnichStitku SPS = seznamPracovnichStitku;
+        ObservableList<String> IDstitku = FXCollections.observableArrayList();
+        try{
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+            if(!new File(getNazevXML()).exists())
+                return new SeznamZamestnancu();
+            Document document = documentBuilder.parse(new File(getNazevXML()));
+            document.getDocumentElement().normalize();
+            Element root = document.getDocumentElement();
+            NodeList nList = document.getElementsByTagName("zamestnanec");           
+            for (int i = 0; i < nList.getLength(); i++){
+                Node node = nList.item(i);
+                if (node.getNodeType() == Node.ELEMENT_NODE){
+                    Element element = (Element) node;
+                    
+                    NodeList n2 = element.getChildNodes();
+                    for (int j = 0; j < n2.getLength(); j++){
+                        if (n2.item(j).getNodeType() == Node.ELEMENT_NODE){
+                            Element e2 = (Element) n2.item(j);
+                            if(e2.getNodeName().contains("pracovniStitky")){
+                                IDstitku.add(e2.getElementsByTagName("pracovniStitek").item(0).getTextContent());
+                            }
+                        }
+                    }
+                    
+                    seznamZamestnancu.pridatDoSeznamu(new Zamestnanec( Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()),
+                            element.getElementsByTagName("titulPred").item(0).getTextContent(), 
+                            element.getElementsByTagName("jmeno").item(0).getTextContent(),
+                            element.getElementsByTagName("prijmeni").item(0).getTextContent(),
+                            element.getElementsByTagName("titulZa").item(0).getTextContent(),
+                            element.getElementsByTagName("pracTel").item(0).getTextContent(),
+                            element.getElementsByTagName("soukTel").item(0).getTextContent(),
+                            element.getElementsByTagName("pracEmail").item(0).getTextContent(),
+                            element.getElementsByTagName("soukEmail").item(0).getTextContent(),
+                            element.getElementsByTagName("kancelar").item(0).getTextContent(),
+                            Boolean.parseBoolean(element.getElementsByTagName("doktorand").item(0).getTextContent()),
+                            EnumUvazek.valueOf(element.getElementsByTagName("uvazek").item(0).getTextContent()),
+                            prehodDoStitku(SPS, IDstitku)
+                    ));
+                }
+            }
+            return seznamZamestnancu;
+        }catch (SAXException | IOException |ParserConfigurationException ex){
+           ex.printStackTrace(); 
+        }
+        return null;   
+    }
+    
+    
+    private SeznamPracovnichStitku prehodDoStitku(SeznamPracovnichStitku SPS, ObservableList<String> IDstitku){
+        SeznamPracovnichStitku vratSPS = new SeznamPracovnichStitku();
+        for (int i = 0; i < IDstitku.size(); i++){
+            for (int j = 0; j < SPS.vratSeznamOL().size(); j++){
+                if (IDstitku.get(i) == SPS.vratSeznamOL().get(j).getNazev())
+                    vratSPS.pridatDoSeznamu(SPS.getPracovniStitek(IDstitku.get(i)));
+            }
+        }
+        return vratSPS;
     }
 }
